@@ -1,6 +1,5 @@
 import { Roboto } from "next/font/google";
 import "../globals.css";
-import { cookies } from "next/headers";
 import GetUserData from "@/lib/GetUserData";
 import UserLayout from "@/components/UserLayout";
 
@@ -14,9 +13,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token").value;
-  const data = await GetUserData(token);
+  const data = await GetUserData();
   return (
     <html lang="en">
       <body className={roboto.className}>
