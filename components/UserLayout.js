@@ -1,7 +1,10 @@
 "use client";
 import { Box } from "@mui/material";
 import NavBar from "./NavBar";
+
 const UserLayout = ({ children, data }) => {
+  if (!data) return <div>Loading...</div>; // Loading state for smoother SSR
+
   return (
     <Box
       sx={{
@@ -25,8 +28,8 @@ const UserLayout = ({ children, data }) => {
           padding: 2,
           overflowY: "auto",
           zIndex: 1,
-          marginTop: !data ? "-80px" : "-100px", // Ensure this matches or slightly exceeds your NavBar height
-          paddingTop: !data ? "80px" : "100px", // Adjust padding to ensure content is not hidden behind the header
+          marginTop: "-100px",
+          paddingTop: "100px",
         }}
       >
         {children}
@@ -34,4 +37,5 @@ const UserLayout = ({ children, data }) => {
     </Box>
   );
 };
+
 export default UserLayout;

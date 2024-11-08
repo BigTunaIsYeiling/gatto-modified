@@ -16,10 +16,11 @@ import { useState } from "react";
 import { VscAccount, VscBell, VscHome, VscMail } from "react-icons/vsc";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/app/logo.png"; 
+import Logo from "@/app/logo.png";
 import { IoIosLogOut } from "react-icons/io";
 import { IoShareOutline } from "react-icons/io5";
 import UserDialog from "./ChangeUserSettings";
+import { logoutAction } from "@/lib/userActions";
 export default function NavBar({
   avatar,
   isTwitter,
@@ -38,13 +39,8 @@ export default function NavBar({
     setAnchorEl(null);
   };
   const handleLogout = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/user/logout`,
-      {
-        credentials: "include",
-      }
-    );
-    if (response.ok) {
+    const res = await logoutAction();
+    if (res.success) {
       router.push("/register");
     }
   };
@@ -170,7 +166,7 @@ export default function NavBar({
               gap: 3,
             }}
           >
-            <Link href="/" passHref>
+            <Link href="/">
               <IconButton
                 sx={{
                   color: pathname === "/" ? "rgb(247,152,18)" : "#777",
@@ -180,7 +176,7 @@ export default function NavBar({
                 <VscHome size={24} />
               </IconButton>
             </Link>
-            <Box onClick={() => router.push(`/${id}`)}>
+            <Link href={`/${id}`}>
               <IconButton
                 sx={{
                   color: pathname != `/${id}` ? "#777" : "rgb(247,152,18)",
@@ -189,8 +185,8 @@ export default function NavBar({
               >
                 <VscAccount size={24} />
               </IconButton>
-            </Box>
-            <Link href="/messages" passHref>
+            </Link>
+            <Link href="/messages">
               <IconButton
                 sx={{
                   color: pathname === "/messages" ? "rgb(247,152,18)" : "#777",
@@ -210,7 +206,7 @@ export default function NavBar({
                 </Badge>
               </IconButton>
             </Link>
-            <Link href="/notifications" passHref>
+            <Link href="/notifications">
               <IconButton
                 sx={{
                   color:
@@ -262,7 +258,7 @@ export default function NavBar({
               justifyContent: "space-between",
             }}
           >
-            <Link href="/" passHref>
+            <Link href="/">
               <IconButton
                 sx={{
                   color: pathname === "/" ? "rgb(247,152,18)" : "#777",
@@ -272,7 +268,7 @@ export default function NavBar({
                 <VscHome size={24} />
               </IconButton>
             </Link>
-            <Box onClick={() => router.push(`/${id}`)}>
+            <Link href={`/${id}`}>
               <IconButton
                 sx={{
                   color: pathname != `/${id}` ? "#777" : "rgb(247,152,18)",
@@ -281,8 +277,8 @@ export default function NavBar({
               >
                 <VscAccount size={24} />
               </IconButton>
-            </Box>
-            <Link href="/messages" passHref>
+            </Link>
+            <Link href="/messages">
               <IconButton
                 sx={{
                   color: pathname === "/messages" ? "rgb(247,152,18)" : "#777",
@@ -302,7 +298,7 @@ export default function NavBar({
                 </Badge>
               </IconButton>
             </Link>
-            <Link href="/notifications" passHref>
+            <Link href="/notifications">
               <IconButton
                 sx={{
                   color:

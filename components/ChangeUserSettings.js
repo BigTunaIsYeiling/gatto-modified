@@ -18,8 +18,9 @@ import { styled } from "@mui/system";
 import { TbCameraMinus } from "react-icons/tb";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { useRouter } from "next/navigation";
 import ConfirmDialog from "./UserConfirmDialog";
+import { ChangeUserSettingsAction } from "@/lib/userActions";
+import toast from "react-hot-toast";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -38,7 +39,6 @@ const GlassButton = styled(Button)({
 export default function UserDialog({ isTwitter, username, avatar, id }) {
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -70,31 +70,6 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
       DisplayAvatar(file);
     }
   };
-  const handleSubmit = async (e) => {
-    // const toastId = toast.loading("Updating...");
-    // e.preventDefault();
-    // const formData = new FormData();
-    // formData.append("avatar", avatarFile);
-    // formData.append("username", NewUsername);
-    // formData.append("bio", NewBio);
-    // formData.append("password", NewPassword);
-    // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-    //   method: "PUT",
-    //   body: formData,
-    //   credentials: "include",
-    // });
-    // if (response.ok) {
-    //   toast.success("User updated successfully", { id: toastId });
-    //   handleClose();
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/user/`);
-    //   router.refresh();
-    // } else {
-    //   const data = await response.json();
-    //   return data.errors.forEach((error) => {
-    //     toast.error(error, { id: toastId });
-    //   });
-    // }
-  };
   const handleTextChange = (e) => {
     const value = e.target.value;
     setBio(value);
@@ -105,6 +80,22 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
       setDirection("rtl");
     } else {
       setDirection("ltr");
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("username", NewUsername);
+    formData.append("password", NewPassword);
+    formData.append("bio", NewBio);
+    formData.append("avatar", avatarFile);
+
+    const result = await ChangeUserSettingsAction(formData);
+
+    if (result.success) {
+      toast.success("User settings updated successfully");
+    } else {
+      toast.error(result.errors[0]);
     }
   };
   return (
@@ -139,7 +130,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
             overflowX: "hidden",
           },
         }}
-        component={"form"}
+        component="form"
         onSubmit={handleSubmit}
       >
         <Box
@@ -199,6 +190,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
                 accept="image/*"
                 type="file"
                 onChange={handleAvatarChange}
+                name="avatar"
               />
             </IconButton>
           </Box>
@@ -224,6 +216,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
               value={NewBio}
               onChange={handleTextChange}
               onKeyDown={(e) => e.stopPropagation()}
+              name="bio"
             />
           </Box>
           <Box sx={{ mb: 2 }}>
@@ -247,6 +240,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
               sx={{ width: "100%" }}
               autoComplete="username"
               onKeyDown={(e) => e.stopPropagation()}
+              name="username"
             />
           </Box>
           {!isTwitter && (
@@ -272,6 +266,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
                 onKeyDown={(e) => e.stopPropagation()}
+                name="password"
               />
               <IconButton
                 onClick={togglePasswordVisibility}
