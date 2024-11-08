@@ -94,6 +94,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
 
     if (result.success) {
       toast.success("User settings updated successfully");
+      handleClose();
     } else {
       toast.error(result.errors[0]);
     }

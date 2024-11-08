@@ -1,5 +1,6 @@
+import GetRouteData from "@/lib/GetRouteData";
 export default async function Page() {
-  return (
-    <div>page</div>
-  )
+  const { userid } = await params;
+  const data = await GetRouteData(userid);
+  return <div>{data.bio}</div>;
 }

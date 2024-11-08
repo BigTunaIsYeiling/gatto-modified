@@ -1,3 +1,4 @@
+import { DeleteUserAction } from "@/lib/userActions";
 import styled from "@emotion/styled";
 import {
   Dialog,
@@ -37,14 +38,10 @@ const ConfirmDialog = () => {
   };
 
   const handleDelete = async () => {
-    const toastId = toast.loading("Deleting...");
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-      method: "DELETE",
-      credentials: "include",
-    });
-    if (response.ok) {
-      toast.success("User deleted successfully", { id: toastId });
-      return router.push("/register");
+    const result = await DeleteUserAction();
+    if (result.success) {
+      toast.success("User deleted successfully");
+      router.push("/register");
     }
   };
   return (
