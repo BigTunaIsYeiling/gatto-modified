@@ -1,6 +1,5 @@
 import { Roboto } from "next/font/google";
 import "../globals.css";
-import { Toaster } from "react-hot-toast";
 import { cookies } from "next/headers";
 import GetUserData from "@/lib/GetUserData";
 import UserLayout from "@/components/UserLayout";
@@ -22,22 +21,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={roboto.className}>
         <div className="gradient-container">
-          <UserLayout data={data}>
-            <Toaster
-              position="top-right"
-              reverseOrder={true}
-              toastOptions={{
-                style: {
-                  background: "linear-gradient(180deg, #f8f4f0, #fdecd2)",
-                  color: "#000",
-                  borderRadius: "10px",
-                  fontSize: "12px",
-                },
-                duration: 1800,
-              }}
-            />
-            {children}
-          </UserLayout>
+          <UserLayout data={data}>{children}</UserLayout>
         </div>
       </body>
     </html>
