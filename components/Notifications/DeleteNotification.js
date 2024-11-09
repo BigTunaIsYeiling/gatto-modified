@@ -1,3 +1,4 @@
+import { DeleteNotiAction } from "@/lib/NotificationsActions";
 import {
   Dialog,
   DialogTitle,
@@ -8,6 +9,7 @@ import {
 } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 const ConfirmDialog = ({ id }) => {
   const [open, setOpen] = useState(false);
@@ -18,19 +20,11 @@ const ConfirmDialog = ({ id }) => {
     setOpen(true);
   };
   const handleDelete = async () => {
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/note/${id}`,
-    //   {
-    //     method: "DELETE",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     credentials: "include",
-    //   }
-    // );
-    // if (response.ok) {
-    //   return mutate(`${process.env.NEXT_PUBLIC_API_URL}/note`);
-    // }
+    const res = await DeleteNotiAction(id);
+    if (res.success) {
+      onClose();
+      toast.success("Notification deleted successfully");
+    }
   };
   return (
     <React.Fragment>
