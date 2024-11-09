@@ -6,10 +6,9 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import React from "react";
 export default function ListItemUser({ user }) {
-  const router = useRouter();
   return (
     <ListItem
       alignItems="flex-start"
@@ -18,9 +17,9 @@ export default function ListItemUser({ user }) {
         mb: 1,
         p: 1,
       }}
-      onClick={() => {
-        router.push(`/${user.id}`);
-      }}
+      component={Link}
+      href={`/${user.id}`}
+      prefetch={true}
     >
       <ListItemAvatar>
         <Avatar

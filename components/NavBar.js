@@ -166,7 +166,7 @@ export default function NavBar({
               gap: 3,
             }}
           >
-            <Link href="/">
+            <Link href="/" prefetch={true}>
               <IconButton
                 sx={{
                   color: pathname === "/" ? "rgb(247,152,18)" : "#777",
@@ -176,7 +176,7 @@ export default function NavBar({
                 <VscHome size={24} />
               </IconButton>
             </Link>
-            <Link href={`/${id}`}>
+            <Link href={`/${id}`} prefetch={true}>
               <IconButton
                 sx={{
                   color: pathname != `/${id}` ? "#777" : "rgb(247,152,18)",
@@ -186,7 +186,7 @@ export default function NavBar({
                 <VscAccount size={24} />
               </IconButton>
             </Link>
-            <Link href="/messages">
+            <Link href="/messages" prefetch={true}>
               <IconButton
                 sx={{
                   color: pathname === "/messages" ? "rgb(247,152,18)" : "#777",
@@ -206,7 +206,7 @@ export default function NavBar({
                 </Badge>
               </IconButton>
             </Link>
-            <Link href="/notifications">
+            <Link href="/notifications" prefetch={true}>
               <IconButton
                 sx={{
                   color:
@@ -258,7 +258,7 @@ export default function NavBar({
               justifyContent: "space-between",
             }}
           >
-            <Link href="/">
+            <Link href="/" prefetch={true}>
               <IconButton
                 sx={{
                   color: pathname === "/" ? "rgb(247,152,18)" : "#777",
@@ -268,7 +268,7 @@ export default function NavBar({
                 <VscHome size={24} />
               </IconButton>
             </Link>
-            <Link href={`/${id}`}>
+            <Link href={`/${id}`} prefetch={true}>
               <IconButton
                 sx={{
                   color: pathname != `/${id}` ? "#777" : "rgb(247,152,18)",
@@ -278,7 +278,7 @@ export default function NavBar({
                 <VscAccount size={24} />
               </IconButton>
             </Link>
-            <Link href="/messages">
+            <Link href="/messages" prefetch={true}>
               <IconButton
                 sx={{
                   color: pathname === "/messages" ? "rgb(247,152,18)" : "#777",
@@ -298,7 +298,7 @@ export default function NavBar({
                 </Badge>
               </IconButton>
             </Link>
-            <Link href="/notifications">
+            <Link href="/notifications" prefetch={true}>
               <IconButton
                 sx={{
                   color:
