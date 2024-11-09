@@ -1,3 +1,4 @@
+import UserProfile from "@/components/UserProfile";
 import GetRouteData from "@/lib/GetRouteData";
 
 export async function generateMetadata({ params }) {
@@ -8,6 +9,8 @@ export async function generateMetadata({ params }) {
     description: `${data.username}'s profile`,
   };
 }
-export default async function Layout({ children }) {
-  return <div>{children}</div>;
+export default async function Layout({ children, params }) {
+  const { userid } = await params;
+  const routeUserData = await GetRouteData(userid);
+  return <UserProfile data={routeUserData}>{children}</UserProfile>;
 }
