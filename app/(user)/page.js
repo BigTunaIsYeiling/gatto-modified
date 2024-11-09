@@ -1,8 +1,7 @@
-import { Box} from "@mui/material";
-export default async function Home() {
-  return (
-    <Box>
-      <h1>Home</h1>
-    </Box>
-  );
+import Home from "@/components/HomePage";
+import GetUsersList from "@/lib/GetUsersList";
+
+export default async function Page() {
+  const userslistData = await GetUsersList();
+  return <Home usersData={userslistData} />;
 }
