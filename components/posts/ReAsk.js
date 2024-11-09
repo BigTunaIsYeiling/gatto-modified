@@ -13,7 +13,8 @@ import {
 } from "@mui/material";
 import toast from "react-hot-toast";
 import { AiOutlineClose } from "react-icons/ai";
-import {BiSend } from "react-icons/bi";
+import { BiSend } from "react-icons/bi";
+import { AddReplyonPost } from "@/lib/postsActions";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -42,29 +43,20 @@ export default function ReAsk({ messagehead, senderid, receiverid, postId }) {
   const [bodymessage, setmessagebody] = useState("");
   const [direction, setDirection] = useState("ltr");
   const SendMessageRequest = async () => {
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/message/reply`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       content: bodymessage,
-    //       senderId: senderid,
-    //       receiverId: receiverid,
-    //       postId,
-    //     }),
-    //   }
-    // );
-    // const data = await response.json();
-    // if (response.ok) {
-    //   toast.success("Message sent successfully");
-    //   setmessagebody("");
-    //   return handleClose();
-    // } else {
-    //   return toast.error(data.error);
-    // }
+    const body = {
+      content: bodymessage,
+      senderId: senderid,
+      receiverId: receiverid,
+      postId,
+    };
+    const res = await AddReplyonPost(body);
+    if (res.success) {
+      toast.success("Message sent successfully");
+      setmessagebody("");
+      return handleClose();
+    } else {
+      return toast.error(res.error);
+    }
   };
   const handleTextChange = (e) => {
     const value = e.target.value;

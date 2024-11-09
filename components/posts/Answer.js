@@ -20,6 +20,7 @@ import { AiOutlineNodeExpand } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import ConfirmDialog from "./DeletePost";
 import ReAsk from "./ReAsk";
+import { LikePostAction } from "@/lib/postsActions";
 export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,34 +51,13 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
   };
 
   const LikePost = async () => {
-    // // Optimistically update UI state
-    // setIsLiked(!isLiked);
-    // setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
-
-    // // Update the backend
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/post/like`,
-    //   {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       postId: post.postId,
-    //     }),
-    //     credentials: "include",
-    //   }
-    // );
-
-    // if (response.ok) {
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/post/${useridPosts}`); // Revalidate on success
-    // } else {
-    //   // Revert optimistic UI update if there's an error
-    //   setIsLiked(isLiked);
-    //   setLikesCount(isLiked ? likesCount : likesCount - 1);
-    //   const data = await response.json();
-    //   toast.error(data.error);
-    // }
+    setIsLiked(!isLiked);
+    setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
+    const res = await LikePostAction({ postId: post.postId, useridPosts });
+    if (!res.success) {
+      setIsLiked(isLiked);
+      setLikesCount(isLiked ? likesCount : likesCount - 1);
+    }
   };
 
   return (

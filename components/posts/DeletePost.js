@@ -1,3 +1,4 @@
+import { DeletePostAction } from "@/lib/postsActions";
 import {
   Dialog,
   DialogTitle,
@@ -9,8 +10,8 @@ import {
 } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
-// import { mutate } from "swr";
 const ConfirmDialog = ({ postId, useridPosts }) => {
   const [open, setOpen] = useState(false);
   const onClose = () => {
@@ -20,17 +21,11 @@ const ConfirmDialog = ({ postId, useridPosts }) => {
     setOpen(true);
   };
   const DeletePost = async () => {
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/post/${postId}`,
-    //   {
-    //     method: "DELETE",
-    //     credentials: "include",
-    //   }
-    // );
-    // const data = await response.json();
-    // if (response.ok) {
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/post/${useridPosts}`);
-    // }
+    const res = await DeletePostAction({ postId, useridPosts });
+    if (res.success) {
+      toast.success("Post deleted successfully");
+      return onClose();
+    }
   };
   return (
     <React.Fragment>
