@@ -8,7 +8,8 @@ import {
   styled,
   Button,
 } from "@mui/material";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+import { SendMessage } from "@/lib/MessagesActions";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -29,29 +30,21 @@ const GlassButton = styled(Button)({
 const UserProfile = ({ children, data, userid, userdata }) => {
   const [message, setMessage] = useState("");
   const [direction, setDirection] = useState("ltr");
-  // const SendMessageRequest = async () => {
-  //   const response = await fetch(
-  //     `${process.env.NEXT_PUBLIC_API_URL}/message/`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         content: message,
-  //         senderId: !userdata ? null : userdata.id,
-  //         receiverId: userid,
-  //       }),
-  //     }
-  //   );
-  //   const data = await response.json();
-  //   if (response.ok) {
-  //     toast.success("Message sent successfully");
-  //     return setMessage("");
-  //   } else {
-  //     return toast.error(data.error);
-  //   }
-  // };
+  const SendMessageRequest = async () => {
+    const res = await SendMessage({
+      body: {
+        content: message,
+        senderId: !userdata ? null : userdata.id,
+        receiverId: userid,
+      },
+    });
+    if (res.success) {
+      toast.success("Message sent successfully");
+      setMessage("");
+    } else {
+      toast.error(res.error);
+    }
+  };
   const handleTextChange = (e) => {
     const value = e.target.value;
     setMessage(value);
@@ -142,7 +135,7 @@ const UserProfile = ({ children, data, userid, userdata }) => {
       <Box sx={{ width: "100%", maxWidth: 600 }}>
         <GlassButton
           disabled={message == ""}
-          // onClick={SendMessageRequest}
+          onClick={SendMessageRequest}
           sx={{ width: "100%" }}
         >
           Send

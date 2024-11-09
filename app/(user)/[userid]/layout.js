@@ -1,5 +1,6 @@
 import UserProfile from "@/components/UserProfile";
 import GetRouteData from "@/lib/GetRouteData";
+import GetUserData from "@/lib/GetUserData";
 
 export async function generateMetadata({ params }) {
   const { userid } = await params;
@@ -11,6 +12,15 @@ export async function generateMetadata({ params }) {
 }
 export default async function Layout({ children, params }) {
   const { userid } = await params;
-  const routeUserData = await GetRouteData(userid);
-  return <UserProfile data={routeUserData}>{children}</UserProfile>;
+  const signeduser = GetUserData();
+  const routeUser = GetRouteData(userid);
+  const [routeUserData, signedUserData] = await Promise.all([
+    routeUser,
+    signeduser,
+  ]);
+  return (
+    <UserProfile data={routeUserData} userdata={signedUserData} userid={userid}>
+      {children}
+    </UserProfile>
+  );
 }
