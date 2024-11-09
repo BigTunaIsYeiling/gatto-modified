@@ -1,4 +1,4 @@
-import Answers from "@/components/Answers";
+import Answers from "@/components/posts/Answers";
 import GetRouteData from "@/lib/GetRouteData";
 import GetUserData from "@/lib/GetUserData";
 import { GetPosts } from "@/lib/postsActions";

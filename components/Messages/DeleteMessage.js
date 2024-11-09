@@ -1,3 +1,4 @@
+import { DeleteMessageAction } from "@/lib/MessagesActions";
 import {
   Dialog,
   DialogTitle,
@@ -8,6 +9,7 @@ import {
 } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 const ConfirmDialog = ({ messageId }) => {
   const [open, setOpen] = useState(false);
@@ -19,20 +21,11 @@ const ConfirmDialog = ({ messageId }) => {
   };
 
   const DeleteMessage = async () => {
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/message`, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ messageId }),
-    //   credentials: "include",
-    // });
-    // const data = await res.json();
-    // if (res.ok) {
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/message`);
-    //   return mutate(`${process.env.NEXT_PUBLIC_API_URL}/user/`);
-    // }
-    // return data;
+    const res = await DeleteMessageAction(messageId);
+    if (res.success) {
+      toast.success("Message deleted successfully");
+      onClose();
+    }
   };
   return (
     <React.Fragment>

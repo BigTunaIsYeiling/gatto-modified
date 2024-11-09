@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { AiOutlineClose } from "react-icons/ai";
 import toast from "react-hot-toast";
+import { AddPost } from "@/lib/postsActions";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -41,22 +42,18 @@ export default function ReplyComponent({ content, id }) {
   };
   const handleClose = () => setOpen(false);
   const handleReply = async () => {
-    // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ PostBody: replyText, messageId: id }),
-    //   credentials: "include",
-    // });
-    // if (response.ok) {
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/message`);
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/user/`);
-    //   setReplyText("");
-    //   return handleClose();
-    // }
-    // const resData = await response.json();
-    // return toast.error(resData.error);
+    const body = {
+      PostBody: replyText,
+      messageId: id,
+    };
+    const res = await AddPost(body);
+    if (res.success) {
+      toast.success("Post added successfully");
+      setReplyText("");
+      return handleClose();
+    } else {
+      return toast.error(res.error);
+    }
   };
   const handleTextChange = (e) => {
     const value = e.target.value;

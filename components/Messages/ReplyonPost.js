@@ -12,8 +12,8 @@ import {
   Divider,
 } from "@mui/material";
 import { AiOutlineClose } from "react-icons/ai";
-// import { mutate } from "swr";
 import toast from "react-hot-toast";
+import { AddPostForReply } from "@/lib/postsActions";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -42,6 +42,19 @@ export default function ReplyOnPost({ content, id, parentpost }) {
   };
   const handleClose = () => setOpen(false);
   const handleReply = async () => {
+    const body = {
+      PostBody: replyText,
+      messageId: id,
+      parentPostId: parentpost,
+    };
+    const res = await AddPostForReply(body);
+    if (res.success) {
+      toast.success("Post added successfully");
+      setReplyText("");
+      return handleClose();
+    } else {
+      return toast.error(res.error);
+    }
     // const response = await fetch(
     //   `${process.env.NEXT_PUBLIC_API_URL}/post/reply`,
     //   {
