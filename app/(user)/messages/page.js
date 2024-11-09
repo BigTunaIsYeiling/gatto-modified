@@ -1,5 +1,7 @@
+import MessagesPage from "@/components/Messages/Messagepage";
+import { GetMessages } from "@/lib/MessagesActions";
+
 export default async function Page() {
-  return (
-    <div>page</div>
-  )
+  const messagesData = await GetMessages();
+  return <MessagesPage data={messagesData} />
 }

@@ -1,5 +1,7 @@
+import NotificationsPage from "@/components/Notifications/NotificationsPage";
+import { GetNotifications } from "@/lib/NotificationsActions";
+
 export default async function Page() {
-  return (
-    <div>page</div>
-  )
+  const Notificationsdata = await GetNotifications();
+  return <NotificationsPage data={Notificationsdata} />;
 }
