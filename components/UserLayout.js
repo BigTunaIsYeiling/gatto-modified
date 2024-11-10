@@ -2,6 +2,7 @@
 import { Box } from "@mui/material";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
+import BackgroundTokenRefresher from "./TokenRefreshcomponent";
 
 const UserLayout = ({ children, data }) => {
   const [hydratedData, setHydratedData] = useState(null);
@@ -39,6 +40,7 @@ const UserLayout = ({ children, data }) => {
           paddingTop: "100px",
         }}
       >
+        <BackgroundTokenRefresher />
         {children}
       </Box>
     </Box>
