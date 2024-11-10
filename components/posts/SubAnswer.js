@@ -17,8 +17,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import ReAsk from "./ReAsk";
 import { IoShareOutline } from "react-icons/io5";
-import { AiOutlineDelete } from "react-icons/ai";
-import ConfirmDialog from "../Delete/DeleteSub";
+import ConfirmDialog from "./DeleteSub";
+import { LikeSubPostAction } from "@/lib/SubPostsActions";
 export const SubAnswer = ({
   post,
   avatar,
@@ -28,6 +28,8 @@ export const SubAnswer = ({
   isSubAnswer,
   postParam,
 }) => {
+  const [isLiked, setIsLiked] = useState(post.likes.includes(userid));
+  const [likesCount, setLikesCount] = useState(post.likes.length);
   const [anchorEl, setAnchorEl] = useState(null);
   // Open delete menu
   const handleMenuClick = (event) => {
@@ -49,41 +51,12 @@ export const SubAnswer = ({
     }
   };
   const LikePost = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/post/like`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          postId: post.postId,
-        }),
-        credentials: "include",
-      }
-    );
-    const data = await response.json();
-    if (response.ok) {
-      mutate(
-        `${process.env.NEXT_PUBLIC_API_URL}/post/${useridPosts}/p/${postParam}`
-      );
-    } else {
-      return toast.error(data.error);
-    }
-  };
-  const DeletePost = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/post/${post.postId}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-      }
-    );
-    const data = await response.json();
-    if (response.ok) {
-      mutate(`${process.env.NEXT_PUBLIC_API_URL}/post/p/${postParam}`);
-    } else {
-      return toast.error(data.error);
+    setIsLiked(!isLiked);
+    setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
+    const res = await LikeSubPostAction({ postId: post.postId, useridPosts });
+    if (!res.success) {
+      setIsLiked(isLiked);
+      setLikesCount(isLiked ? likesCount : likesCount - 1);
     }
   };
   return (
@@ -173,12 +146,13 @@ export const SubAnswer = ({
           {/* Heart Icon Toggle */}
           <IconButton
             aria-label="like"
-            sx={{ color: post.likes.includes(userid) ? "red" : "#6A6A6A" }}
+            sx={{ color: isLiked ? "red" : "#6A6A6A" }}
             onClick={LikePost}
+            disabled={userid == null}
           >
-            {post.likes.includes(userid) ? <FaHeart /> : <FaRegHeart />}
+            {isLiked ? <FaHeart /> : <FaRegHeart />}
             <Typography variant="body2" color="black" sx={{ ml: 1 }}>
-              {post.likes.length}
+              {likesCount}
             </Typography>
           </IconButton>
           <ReAsk
