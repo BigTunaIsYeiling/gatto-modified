@@ -1,10 +1,17 @@
 "use client";
 import { Box } from "@mui/material";
 import NavBar from "./NavBar";
+import { useEffect, useState } from "react";
 
 const UserLayout = ({ children, data }) => {
-  if (!data) return <div>Loading...</div>; // Loading state for smoother SSR
+  const [hydratedData, setHydratedData] = useState(null);
 
+  useEffect(() => {
+    // Setting client-only data here
+    setHydratedData(data);
+  }, [data]);
+
+  if (!hydratedData) return null;
   return (
     <Box
       sx={{

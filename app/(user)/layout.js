@@ -3,7 +3,6 @@ import "../globals.css";
 import GetUserData from "@/lib/GetUserData";
 import UserLayout from "@/components/UserLayout";
 import { Toaster } from "react-hot-toast";
-import { Suspense } from "react";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -17,7 +16,6 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const data = await GetUserData();
-
   return (
     <html lang="en">
       <body className={roboto.className}>
@@ -35,13 +33,7 @@ export default async function RootLayout({ children }) {
               duration: 1800,
             }}
           />
-          <Suspense fallback={<div>Loading...</div>}>
-            {data ? (
-              <UserLayout data={data}>{children}</UserLayout>
-            ) : (
-              <div>Error</div>
-            )}
-          </Suspense>
+          <UserLayout data={data}>{children}</UserLayout>
         </div>
       </body>
     </html>
