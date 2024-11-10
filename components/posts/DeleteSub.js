@@ -1,3 +1,4 @@
+import { DeleteSubPostAction } from "@/lib/SubPostsActions";
 import {
   Dialog,
   DialogTitle,
@@ -9,9 +10,9 @@ import {
 } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
-import { mutate } from "swr";
-const ConfirmDialog = ({ postId, postParam }) => {
+const ConfirmDialog = ({ postId, postParam, RouteuserId }) => {
   const [open, setOpen] = useState(false);
   const onClose = () => {
     setOpen(false);
@@ -20,18 +21,10 @@ const ConfirmDialog = ({ postId, postParam }) => {
     setOpen(true);
   };
   const DeletePost = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/post/${postId}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-      }
-    );
-    const data = await response.json();
-    if (response.ok) {
-      mutate(`${process.env.NEXT_PUBLIC_API_URL}/post/p/${postParam}`);
-    } else {
-      return data;
+    const res = await DeleteSubPostAction({ postId, RouteuserId, postParam });
+    if (res.success) {
+      toast.success("Post deleted successfully");
+      return onClose();
     }
   };
   return (

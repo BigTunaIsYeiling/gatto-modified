@@ -14,7 +14,6 @@ import { format, formatDistanceToNow } from "date-fns";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import ReAsk from "./ReAsk";
 import { IoShareOutline } from "react-icons/io5";
 import ConfirmDialog from "./DeleteSub";
@@ -53,7 +52,11 @@ export const SubAnswer = ({
   const LikePost = async () => {
     setIsLiked(!isLiked);
     setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
-    const res = await LikeSubPostAction({ postId: post.postId, useridPosts });
+    const res = await LikeSubPostAction({
+      postId: post.postId,
+      useridPosts,
+      postParam,
+    });
     if (!res.success) {
       setIsLiked(isLiked);
       setLikesCount(isLiked ? likesCount : likesCount - 1);
@@ -197,7 +200,11 @@ export const SubAnswer = ({
                 </ListItemIcon>
               </MenuItem>
               <Divider />
-              <ConfirmDialog postParam={postParam} postId={post.postId} />
+              <ConfirmDialog
+                postParam={postParam}
+                postId={post.postId}
+                RouteuserId={useridPosts}
+              />
             </Menu>
           </>
         )}
