@@ -78,6 +78,9 @@ const Signup = () => {
       });
     }
   };
+  const handleTwitterLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`;
+  };
   return (
     <Box
       sx={{
@@ -160,6 +163,7 @@ const Signup = () => {
               mt: 2,
             }}
             startIcon={<FaXTwitter />}
+            onClick={handleTwitterLogin}
           >
             Sign Up with Twitter
           </GlassButton>

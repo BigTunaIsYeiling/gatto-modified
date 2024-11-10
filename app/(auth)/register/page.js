@@ -84,10 +84,9 @@ const Login = () => {
     }
   };
 
-  // const handleTwitterLogin = () => {
-  //   window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/user/auth/twitter`;
-  // };
-
+  const handleTwitterLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`;
+  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -165,7 +164,6 @@ const Login = () => {
           </Typography>
           <GlassButton
             fullWidth
-            // onClick={handleTwitterLogin}
             sx={{
               mt: 2,
               background: "#1DA1F2",
@@ -175,6 +173,7 @@ const Login = () => {
               justifyContent: "center",
             }}
             startIcon={<FaXTwitter />}
+            onClick={handleTwitterLogin}
           >
             Log In with Twitter
           </GlassButton>
