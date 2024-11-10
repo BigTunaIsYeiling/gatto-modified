@@ -85,7 +85,7 @@ const Login = () => {
   };
 
   const handleTwitterLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/twitter`;
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/user/auth/twitter`;
   };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
