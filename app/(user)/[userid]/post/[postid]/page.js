@@ -1,4 +1,6 @@
 import PostOnePosts from "@/components/posts/PostRoute";
+import GetRouteData from "@/lib/GetRouteData";
+import GetUserData from "@/lib/GetUserData";
 import { GetPostsRouteAction } from "@/lib/postsActions";
 
 export default async function Page({ params }) {
