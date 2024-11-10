@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { SubAnswer } from "./SubAnswer";
+import Link from "next/link";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -34,9 +35,9 @@ export default function PostOnePosts({
       <Box sx={{ width: "100%", maxWidth: 600 }} my={1}>
         <GlassButton
           sx={{ width: "100%" }}
-          onClick={() => {
-            router.push(`/${userid}`);
-          }}
+          component={Link}
+          href={`/${userid}`}
+          prefetch={true}
         >
           View {data.username + "'s"} All Answers
         </GlassButton>

@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import ConfirmDialog from "./DeletePost";
 import ReAsk from "./ReAsk";
 import { LikePostAction } from "@/lib/postsActions";
+import Link from "next/link";
 export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -189,10 +190,9 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
             <MenuItem
               sx={{ display: "flex", justifyContent: "space-between" }}
               disabled={post.isParentPost}
-              onClick={() => {
-                if (post.isParentPost) return;
-                router.push(`/${useridPosts}/post/${post.postId}`);
-              }}
+              component={Link}
+              href={`/${useridPosts}/post/${post.postId}`}
+              prefetch={true}
             >
               <Typography variant="body2">Thread</Typography>
               <ListItemIcon>

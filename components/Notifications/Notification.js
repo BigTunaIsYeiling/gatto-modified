@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import { format, formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/navigation";
 import ConfirmDialog from "./DeleteNotification";
+import Link from "next/link";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -120,9 +121,10 @@ const Notification = ({ notification }) => {
         }}
       >
         <GlassButton
-          // href={notification.link} // Link to the answer
           sx={{ textDecoration: "none" }}
-          onClick={() => router.push(notification.notLink)}
+          component={Link}
+          prefetch={true}
+          href={notification.notLink}
         >
           View
         </GlassButton>
