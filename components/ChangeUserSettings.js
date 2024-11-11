@@ -1,19 +1,14 @@
 "use client";
 import {
   Button,
-  Dialog,
   IconButton,
   Typography,
   Box,
-  MenuItem,
   Stack,
   Divider,
   Avatar,
   TextField,
-  ListItemIcon,
 } from "@mui/material";
-import { CiSettings } from "react-icons/ci";
-import { AiOutlineClose } from "react-icons/ai";
 import { styled } from "@mui/system";
 import { TbCameraMinus } from "react-icons/tb";
 import { useState } from "react";
@@ -36,23 +31,10 @@ const GlassButton = styled(Button)({
   },
 });
 
-export default function UserDialog({ isTwitter, username, avatar }) {
-  const [open, setOpen] = useState(false);
+export default function EditUser({ data }) {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setRev(null);
-    setAvatarFile(null);
-    setUsername("");
-    setBio("");
-    setPassword("");
   };
   const [rev, setRev] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
@@ -74,9 +56,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
     const value = e.target.value;
     setBio(value);
 
-    // Set direction based on input language
     if (/[\u0600-\u06FF]/.test(value.trim().charAt(0))) {
-      // Arabic Unicode range
       setDirection("rtl");
     } else {
       setDirection("ltr");
@@ -94,137 +74,135 @@ export default function UserDialog({ isTwitter, username, avatar }) {
 
     if (result.success) {
       toast.success("User settings updated successfully");
-      handleClose();
+      setRev(null);
+      setAvatarFile(null);
+      setUsername("");
+      setBio("");
+      setPassword("");
     } else {
       toast.error(result.errors[0]);
     }
   };
   return (
-    <>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between" }}
-        onClick={handleClickOpen}
-      >
-        <Stack direction={"column"}>
-          <Typography variant="body2">
-            {username.slice(0, 9)}
-            {username.length > 9 && ".."}
-          </Typography>
-          <Typography color="#777" variant="body2">
-            {isTwitter ? "Twitter User" : "PurrGato User"}
-          </Typography>
-        </Stack>
-        <ListItemIcon>
-          <CiSettings size={18} />
-        </ListItemIcon>
-      </MenuItem>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          sx: {
-            background: "#FFFCF2",
-            borderRadius: { xs: "10px", sm: "10px" },
-            padding: "10px",
-            height: { xs: "100%", sm: "auto" },
-            width: { xs: "100%", sm: 500 },
-            overflowX: "hidden",
-          },
-        }}
-        component="form"
-        onSubmit={handleSubmit}
-        fullScreen={{ xs: true, sm: false }}
-      >
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        mt: 4,
+        overflowX: "hidden",
+      }}
+      component="form"
+      onSubmit={handleSubmit}
+    >
+      <Box sx={{ width: "100%", maxWidth: 600 }}>
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
             alignItems: "center",
-            mb: 3,
+            mb: 2,
+            justifyContent: "center",
+            position: "relative",
+            width: "100%",
+            height: 80,
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            User Options
-          </Typography>
+          <Avatar
+            src={rev ? rev : data.avatar}
+            alt="Upload Photo"
+            sx={{ width: 80, height: 80 }}
+          />
+
           <IconButton
-            edge="end"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
-          >
-            <AiOutlineClose />
-          </IconButton>
-        </Box>
-        <Box sx={{ p: 3 }}>
-          <Box
+            component="label"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              mb: 2,
-              justifyContent: "center",
-              position: "relative",
-              width: "100%",
-              height: 80,
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "rgba(255, 255, 255, 0.7)",
+              borderRadius: "50%",
+              "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
+              },
             }}
           >
-            <Avatar
-              src={rev ? rev : avatar}
-              alt="Upload Photo"
-              sx={{ width: 80, height: 80 }}
+            <TbCameraMinus />
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={handleAvatarChange}
+              name="avatar"
             />
-            <IconButton
-              component="label"
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                backgroundColor: "rgba(255, 255, 255, 0.7)",
-                borderRadius: "50%",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.7)",
+          </IconButton>
+        </Box>
+        <Typography
+          sx={{ mt: 2, fontSize: "28px", fontWeight: 500, textAlign: "center" }}
+        >
+          {data.username}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ my: 1, fontWeight: "400", color: "#777", textAlign: "center" }}
+        >
+          {data.bio}
+        </Typography>
+        <Box sx={{ my: 2 }}>
+          <TextField
+            variant="outlined"
+            placeholder="Update bio"
+            InputProps={{
+              sx: {
+                borderRadius: "25px",
+                backgroundColor: "white",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                backdropFilter: "blur(10px)",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
                 },
-              }}
-            >
-              <TbCameraMinus />
-              <input
-                hidden
-                accept="image/*"
-                type="file"
-                onChange={handleAvatarChange}
-                name="avatar"
-              />
-            </IconButton>
-          </Box>
-          <Box sx={{ mb: 2 }}>
+                direction: direction,
+              },
+            }}
+            multiline
+            rows={3}
+            sx={{ width: "100%" }}
+            value={NewBio}
+            onChange={handleTextChange}
+            onKeyDown={(e) => e.stopPropagation()}
+            name="bio"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            variant="outlined"
+            placeholder="New Username"
+            InputProps={{
+              sx: {
+                borderRadius: "25px",
+                backgroundColor: "white",
+                padding: "2px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                backdropFilter: "blur(10px)",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+              },
+            }}
+            value={NewUsername}
+            onChange={(e) => setUsername(e.target.value)}
+            sx={{ width: "100%" }}
+            autoComplete="username"
+            onKeyDown={(e) => e.stopPropagation()}
+            name="username"
+          />
+        </Box>
+        {!data.isTwitter && (
+          <Box sx={{ position: "relative" }} mb={2}>
             <TextField
               variant="outlined"
-              placeholder="Update bio"
-              InputProps={{
-                sx: {
-                  borderRadius: "25px",
-                  backgroundColor: "white",
-                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                  backdropFilter: "blur(10px)",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                  },
-                  direction: direction,
-                },
-              }}
-              multiline
-              rows={3}
-              sx={{ width: "100%" }}
-              value={NewBio}
-              onChange={handleTextChange}
-              onKeyDown={(e) => e.stopPropagation()}
-              name="bio"
-            />
-          </Box>
-          <Box sx={{ mb: 2 }}>
-            <TextField
-              variant="outlined"
-              placeholder="New Username"
+              placeholder="New Password"
+              type={showPassword ? "text" : "password"}
               InputProps={{
                 sx: {
                   borderRadius: "25px",
@@ -237,64 +215,36 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                   },
                 },
               }}
-              value={NewUsername}
-              onChange={(e) => setUsername(e.target.value)}
               sx={{ width: "100%" }}
-              autoComplete="username"
+              value={NewPassword}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
               onKeyDown={(e) => e.stopPropagation()}
-              name="username"
+              name="password"
             />
+            <IconButton
+              onClick={togglePasswordVisibility}
+              sx={{
+                position: "absolute",
+                right: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "black",
+              }}
+            >
+              {showPassword ? <BsEyeSlash /> : <BsEye />}
+            </IconButton>
           </Box>
-          {!isTwitter && (
-            <Box sx={{ position: "relative" }} mb={2}>
-              <TextField
-                variant="outlined"
-                placeholder="New Password"
-                type={showPassword ? "text" : "password"}
-                InputProps={{
-                  sx: {
-                    borderRadius: "25px",
-                    backgroundColor: "white",
-                    padding: "2px",
-                    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                    backdropFilter: "blur(10px)",
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "none",
-                    },
-                  },
-                }}
-                sx={{ width: "100%" }}
-                value={NewPassword}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-                onKeyDown={(e) => e.stopPropagation()}
-                name="password"
-              />
-              <IconButton
-                onClick={togglePasswordVisibility}
-                sx={{
-                  position: "absolute",
-                  right: "12px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  color: "black",
-                }}
-              >
-                {showPassword ? <BsEyeSlash /> : <BsEye />}
-              </IconButton>
-            </Box>
-          )}
-          <Divider sx={{ my: 3 }} />
-          <Stack direction={"column"} alignItems={"flex-start"}>
-            <GlassButton sx={{ mb: 2 }} disabled>
-              Download Your Twitter Api
-            </GlassButton>
-            <ConfirmDialog />
-          </Stack>
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
+        )}
+        <Divider sx={{ my: 3 }} />
+        <Stack direction={"column"} alignItems={"flex-start"}>
+          <GlassButton sx={{ mb: 2 }} disabled>
+            Download Your Twitter Api
+          </GlassButton>
+          <ConfirmDialog />
           <GlassButton
             type="submit"
+            sx={{ alignSelf: "flex-end" }}
             disabled={
               NewUsername == "" &&
               NewPassword == "" &&
@@ -304,8 +254,8 @@ export default function UserDialog({ isTwitter, username, avatar }) {
           >
             Apply
           </GlassButton>
-        </Box>
-      </Dialog>
-    </>
+        </Stack>
+      </Box>
+    </Box>
   );
 }

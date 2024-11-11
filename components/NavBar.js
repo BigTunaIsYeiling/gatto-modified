@@ -10,6 +10,7 @@ import {
   Avatar,
   ListItemIcon,
   Badge,
+  Stack,
 } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,8 +19,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/app/logo.png";
 import { IoIosLogOut } from "react-icons/io";
+import { CiSettings } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
-import UserDialog from "./ChangeUserSettings";
 import { logoutAction } from "@/lib/userActions";
 export default function NavBar({
   avatar,
@@ -95,12 +96,26 @@ export default function NavBar({
           },
         }}
       >
-        <UserDialog
-          id={id}
-          isTwitter={isTwitter}
-          username={username}
-          avatar={avatar}
-        />
+        <MenuItem
+          sx={{ display: "flex", justifyContent: "space-between" }}
+          component={Link}
+          href="/settings"
+          prefetch={true}
+          scroll={false}
+        >
+          <Stack direction={"column"}>
+            <Typography variant="body2">
+              {username.slice(0, 9)}
+              {username.length > 9 && ".."}
+            </Typography>
+            <Typography color="#777" variant="body2">
+              {isTwitter ? "Twitter User" : "PurrGato User"}
+            </Typography>
+          </Stack>
+          <ListItemIcon>
+            <CiSettings size={18} />
+          </ListItemIcon>
+        </MenuItem>
         <MenuItem
           sx={{ display: "flex", justifyContent: "space-between" }}
           onClick={() => CopyShareProfile(id)}
