@@ -46,7 +46,6 @@ const Notification = ({ notification }) => {
         border: "1px solid rgba(255, 255, 255, 0.3)",
         boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
         position: "relative",
-        cursor: "pointer",
       }}
     >
       <Box
