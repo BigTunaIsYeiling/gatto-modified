@@ -98,26 +98,6 @@ export default function NavBar({
       >
         <MenuItem
           sx={{ display: "flex", justifyContent: "space-between" }}
-          component={Link}
-          href="/settings"
-          prefetch={true}
-          scroll={false}
-        >
-          <Stack direction={"column"}>
-            <Typography variant="body2">
-              {username.slice(0, 9)}
-              {username.length > 9 && ".."}
-            </Typography>
-            <Typography color="#777" variant="body2">
-              {isTwitter ? "Twitter User" : "PurrGato User"}
-            </Typography>
-          </Stack>
-          <ListItemIcon>
-            <CiSettings size={18} />
-          </ListItemIcon>
-        </MenuItem>
-        <MenuItem
-          sx={{ display: "flex", justifyContent: "space-between" }}
           onClick={() => CopyShareProfile(id)}
         >
           <Typography variant="body2">Share profile</Typography>

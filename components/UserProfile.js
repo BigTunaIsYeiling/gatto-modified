@@ -7,9 +7,12 @@ import {
   TextField,
   styled,
   Button,
+  IconButton,
 } from "@mui/material";
 import toast from "react-hot-toast";
 import { SendMessage } from "@/lib/MessagesActions";
+  import { LiaUserEditSolid } from "react-icons/lia";
+import Link from "next/link";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -59,89 +62,114 @@ const UserProfile = ({ children, data, userid, userdata }) => {
   return (
     <Box
       sx={{
+        mt: 4,
+        overflowX: "hidden",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        mt: 4,
-        overflowX: "hidden",
       }}
     >
       <Box
-        p={1}
         sx={{
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          position: "relative",
+          width: { xs: "100%", sm: 600 },
         }}
-        borderRadius={"50%"}
       >
-        <Avatar
-          src={data.avatar}
-          alt={data.username}
-          sx={{ width: 70, height: 70 }}
-        />
-      </Box>
-      <Typography sx={{ mt: 2, fontSize: "28px", fontWeight: 500 }}>
-        {data.username}
-      </Typography>
-      <Typography
-        variant="body1"
-        sx={{ my: 1, fontWeight: "400", color: "#777", textAlign: "center" }}
-      >
-        {data.bio}
-      </Typography>
-      <Box sx={{ width: "100%", maxWidth: 600 }}>
-        <TextField
-          placeholder="Send Anonymous Message"
-          multiline
-          rows={4}
-          value={message}
-          onChange={handleTextChange}
-          variant="outlined"
-          slotProps={{
-            inputLabel: {
-              shrink: false,
-            },
-          }}
+        <IconButton
           sx={{
-            whiteSpace: "pre-wrap",
-            mt: 3,
-            width: "100%",
-            borderRadius: "25px",
-            backgroundColor: "#FFFFFF",
-            padding: "10px 15px",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-            overflow: "hidden",
-            border: "1px solid rgba(255, 255, 255, 0.3)", // Glass effect border
-            backdropFilter: "blur(10px)", // Frosted glass effect
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                border: "none", // Remove default border
-              },
-              "&.Mui-focused fieldset": {
-                border: "none", // Remove default border on focus
-              },
-              "&:hover fieldset": {
-                border: "none", // Remove default border on hover
-              },
-            },
-            "& .MuiInputBase-inputMultiline": {
-              "&::-webkit-scrollbar": {
-                display: "none", // Hide scrollbar
-              },
-            },
-            direction: direction,
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            zIndex: 1,
+            backgroundColor: "white",
           }}
-        />
-      </Box>
-      <Box sx={{ width: "100%", maxWidth: 600 }}>
-        <GlassButton
-          disabled={message == ""}
-          onClick={SendMessageRequest}
-          sx={{ width: "100%" }}
+          component={Link}
+          href="/settings"
+          prefetch={true}
+          scroll={false}
         >
-          Send
-        </GlassButton>
+          <LiaUserEditSolid />
+        </IconButton>
+        <Box
+          p={1}
+          sx={{
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          }}
+          borderRadius={"50%"}
+        >
+          <Avatar
+            src={data.avatar}
+            alt={data.username}
+            sx={{ width: 70, height: 70 }}
+          />
+        </Box>
+        <Typography sx={{ mt: 2, fontSize: "28px", fontWeight: 500 }}>
+          {data.username}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ my: 1, fontWeight: "400", color: "#777", textAlign: "center" }}
+        >
+          {data.bio}
+        </Typography>
+        <Box sx={{ width: "100%", maxWidth: 600 }}>
+          <TextField
+            placeholder="Send Anonymous Message"
+            multiline
+            rows={4}
+            value={message}
+            onChange={handleTextChange}
+            variant="outlined"
+            slotProps={{
+              inputLabel: {
+                shrink: false,
+              },
+            }}
+            sx={{
+              whiteSpace: "pre-wrap",
+              mt: 3,
+              width: "100%",
+              borderRadius: "25px",
+              backgroundColor: "#FFFFFF",
+              padding: "10px 15px",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+              overflow: "hidden",
+              border: "1px solid rgba(255, 255, 255, 0.3)", // Glass effect border
+              backdropFilter: "blur(10px)", // Frosted glass effect
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  border: "none", // Remove default border
+                },
+                "&.Mui-focused fieldset": {
+                  border: "none", // Remove default border on focus
+                },
+                "&:hover fieldset": {
+                  border: "none", // Remove default border on hover
+                },
+              },
+              "& .MuiInputBase-inputMultiline": {
+                "&::-webkit-scrollbar": {
+                  display: "none", // Hide scrollbar
+                },
+              },
+              direction: direction,
+            }}
+          />
+        </Box>
+        <Box sx={{ width: "100%", maxWidth: 600 }}>
+          <GlassButton
+            disabled={message == ""}
+            onClick={SendMessageRequest}
+            sx={{ width: "100%" }}
+          >
+            Send
+          </GlassButton>
+        </Box>
+        {children}
       </Box>
-      {children}
     </Box>
   );
 };
