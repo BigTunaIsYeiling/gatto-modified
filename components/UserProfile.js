@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import toast from "react-hot-toast";
 import { SendMessage } from "@/lib/MessagesActions";
-  import { LiaUserEditSolid } from "react-icons/lia";
+import { LiaUserEditSolid } from "react-icons/lia";
 import Link from "next/link";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
@@ -76,6 +76,7 @@ const UserProfile = ({ children, data, userid, userdata }) => {
           alignItems: "center",
           position: "relative",
           width: { xs: "100%", sm: 600 },
+          p: 2,
         }}
       >
         <IconButton

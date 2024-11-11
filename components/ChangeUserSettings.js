@@ -95,7 +95,7 @@ export default function EditUser({ data }) {
       component="form"
       onSubmit={handleSubmit}
     >
-      <Box sx={{ width: "100%", maxWidth: 600 }}>
+      <Box sx={{ width: "100%", maxWidth: 600, p: 2 }}>
         <Box
           sx={{
             display: "flex",
