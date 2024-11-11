@@ -23,7 +23,10 @@ export default function Home({ usersData }) {
         mt: 4,
       }}
     >
-      <Typography variant="h4" sx={{ mb: 3, textAlign: "center" }}>
+      <Typography
+        variant={{ xs: "h6", sm: "h4" }}
+        sx={{ mb: 3, textAlign: "center" }}
+      >
         Welcome to PurrGatto!
       </Typography>
       <Box sx={{ mb: 3, display: "flex", alignItems: "center", gap: 2 }}>
