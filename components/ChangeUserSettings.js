@@ -36,7 +36,7 @@ const GlassButton = styled(Button)({
   },
 });
 
-export default function UserDialog({ isTwitter, username, avatar, id }) {
+export default function UserDialog({ isTwitter, username, avatar }) {
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
