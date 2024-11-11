@@ -13,7 +13,7 @@ export default function BackgroundTokenRefresher() {
         clearInterval(intervalId);
         router.push("/register");
       }
-    }, 30000);
+    }, 60000);
     return () => clearInterval(intervalId);
   }, [router]);
 
