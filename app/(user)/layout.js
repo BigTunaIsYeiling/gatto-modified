@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
               duration: 1800,
             }}
           />
-          <UserLayout data={data}>{children}</UserLayout>
+          <UserLayout data={data ? data : "guest"}>{children}</UserLayout>
         </div>
       </body>
     </html>
