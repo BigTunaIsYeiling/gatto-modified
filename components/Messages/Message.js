@@ -32,16 +32,13 @@ const Message = ({ message, date, id, post, parentPost }) => {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-        <Avatar sx={{ width: 40, height: 40, mr: 2 }}>
-          <Image
-            src={
-              "https://res.cloudinary.com/drsodrtuf/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1731308045/Gattoavatars/anon_b2dtdb.jpg"
-            }
-            alt="Anonymous"
-            width={40}
-            height={40}
-          />
-        </Avatar>
+        <Avatar
+          sx={{ width: 40, height: 40, mr: 2 }}
+          src={
+            "https://res.cloudinary.com/drsodrtuf/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1731308045/Gattoavatars/anon_b2dtdb.jpg"
+          }
+          alt="Anonymous"
+        />
         <Stack direction={"column"}>
           <Typography variant="body2" sx={{ fontWeight: 600, color: "#333" }}>
             Anonymous
