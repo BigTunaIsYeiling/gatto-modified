@@ -133,6 +133,7 @@ export default function UserDialog({ isTwitter, username, avatar, id }) {
         }}
         component="form"
         onSubmit={handleSubmit}
+        fullScreen={{ xs: true, sm: false }}
       >
         <Box
           sx={{

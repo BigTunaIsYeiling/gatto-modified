@@ -68,11 +68,8 @@ export default function Home({ usersData }) {
             sm: "52vh",
           },
           overflowY: "auto",
-          "&::-webkit-scrollbar": { width: "6px" },
-          "&::-webkit-scrollbar-track": { backgroundColor: "#f6eee6" },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#f0c080",
-            borderRadius: "6px",
+          "&::-webkit-scrollbar": {
+            display: "none",
           },
         }}
       >
