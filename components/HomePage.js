@@ -35,7 +35,16 @@ export default function Home({ usersData }) {
       >
         Welcome to PurrGatto!
       </Typography>
-      <Box sx={{ mb: 3, display: "flex", alignItems: "center", gap: 2 }}>
+      <Box
+        sx={{
+          mb: 3,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          width: "100%",
+        }}
+      >
         <TextField
           variant="outlined"
           placeholder="Search user..."
@@ -60,10 +69,8 @@ export default function Home({ usersData }) {
             },
           }}
           sx={{
-            width: {
-              xs: "100%",
-              sm: 400,
-            },
+            width: "100%",
+            maxWidth: 600,
           }}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
