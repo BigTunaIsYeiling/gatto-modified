@@ -200,8 +200,8 @@ export default function EditUser({ data }) {
             value={NewUsername}
             onChange={(e) => setUsername(e.target.value)}
             sx={{ width: "100%" }}
-            autoComplete="username"
             name="username"
+            autoComplete="off"
           />
         </Box>
         {!data.isTwitter && (
