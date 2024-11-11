@@ -76,7 +76,7 @@ const UserProfile = ({ children, data, userid, userdata }) => {
           alignItems: "center",
           position: "relative",
           width: { xs: "100%", sm: 600 },
-          p: 2,
+          p: 1,
         }}
       >
         {userdata.id == userid && (
