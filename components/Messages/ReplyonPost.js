@@ -55,29 +55,6 @@ export default function ReplyOnPost({ content, id, parentpost }) {
     } else {
       return toast.error(res.error);
     }
-    // const response = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/post/reply`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       PostBody: replyText,
-    //       messageId: id,
-    //       parentPostId: parentpost,
-    //     }),
-    //     credentials: "include",
-    //   }
-    // );
-    // if (response.ok) {
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/message`);
-    //   mutate(`${process.env.NEXT_PUBLIC_API_URL}/user/`);
-    //   setReplyText("");
-    //   return handleClose();
-    // }
-    // const resData = await response.json();
-    // return toast.error(resData.error);
   };
   const handleTextChange = (e) => {
     const value = e.target.value;

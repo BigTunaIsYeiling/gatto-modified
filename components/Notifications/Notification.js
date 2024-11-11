@@ -4,7 +4,6 @@ import { IoMdHeart } from "react-icons/io";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import styled from "@emotion/styled";
 import { format, formatDistanceToNow } from "date-fns";
-import { useRouter } from "next/navigation";
 import ConfirmDialog from "./DeleteNotification";
 import Link from "next/link";
 const GlassButton = styled(Button)({
@@ -25,7 +24,6 @@ const GlassButton = styled(Button)({
 });
 
 const Notification = ({ notification }) => {
-  const router = useRouter();
   const createdAt = new Date(notification.createdAt);
 
   const formatDate = () => {

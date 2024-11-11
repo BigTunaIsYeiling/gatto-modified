@@ -14,7 +14,6 @@ import { format, formatDistanceToNow } from "date-fns";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import { IoShareOutline } from "react-icons/io5";
 import { AiOutlineNodeExpand } from "react-icons/ai";
 import { useRouter } from "next/navigation";
