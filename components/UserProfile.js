@@ -79,21 +79,23 @@ const UserProfile = ({ children, data, userid, userdata }) => {
           p: 2,
         }}
       >
-        <IconButton
-          sx={{
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            zIndex: 1,
-            backgroundColor: "white",
-          }}
-          component={Link}
-          href="/settings"
-          prefetch={true}
-          scroll={false}
-        >
-          <LiaUserEditSolid />
-        </IconButton>
+        {userdata.id == userid && (
+          <IconButton
+            sx={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              zIndex: 1,
+              backgroundColor: "white",
+            }}
+            component={Link}
+            href="/settings"
+            prefetch={true}
+            scroll={false}
+          >
+            <LiaUserEditSolid />
+          </IconButton>
+        )}
         <Box
           p={1}
           sx={{
