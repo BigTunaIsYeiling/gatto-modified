@@ -24,8 +24,14 @@ export default function Home({ usersData }) {
       }}
     >
       <Typography
-        variant={{ xs: "h5", sm: "h4" }}
-        sx={{ mb: 3, textAlign: "center" }}
+        sx={{
+          mb: 3,
+          textAlign: "center",
+          typography: {
+            xs: "h5",
+            sm: "h4",
+          },
+        }}
       >
         Welcome to PurrGatto!
       </Typography>
