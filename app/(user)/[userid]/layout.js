@@ -19,7 +19,11 @@ export default async function Layout({ children, params }) {
     signeduser,
   ]);
   return (
-    <UserProfile data={routeUserData} userdata={signedUserData} userid={userid}>
+    <UserProfile
+      data={routeUserData}
+      userdata={signedUserData ? signedUserData : null}
+      userid={userid}
+    >
       {children}
     </UserProfile>
   );

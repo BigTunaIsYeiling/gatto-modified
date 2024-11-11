@@ -13,7 +13,7 @@ export default async function Page({ params }) {
   return (
     <Answers
       userid={userid}
-      SignedUser={signedUserData}
+      SignedUser={signedUserData ? signedUserData : null}
       PostsData={routeUserPostsData}
       RouteUserdata={routeUserData}
     />

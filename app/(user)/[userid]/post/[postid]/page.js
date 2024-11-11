@@ -19,7 +19,7 @@ export default async function Page({ params }) {
       postid={postid}
       data={routeUserData}
       posts={PostsData}
-      userData={signedUserData}
+      userData={signedUserData ? signedUserData : null}
     />
   );
 }
