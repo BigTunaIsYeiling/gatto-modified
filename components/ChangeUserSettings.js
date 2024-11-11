@@ -123,11 +123,11 @@ export default function UserDialog({ isTwitter, username, avatar }) {
         onClose={handleClose}
         PaperProps={{
           sx: {
-            background: "#FFFCF2", // Gradient background
+            background: "#FFFCF2",
             borderRadius: { xs: "10px", sm: "10px" },
             padding: "10px",
-            height: { xs: "100%", sm: "auto" }, // Full height on small screens, auto on larger
-            width: { xs: "100%", sm: 500 }, // Full width on small screens, 600px on larger
+            height: { xs: "100%", sm: "auto" },
+            width: { xs: "100%", sm: 500 },
             overflowX: "hidden",
           },
         }}
@@ -162,8 +162,8 @@ export default function UserDialog({ isTwitter, username, avatar }) {
               alignItems: "center",
               mb: 2,
               justifyContent: "center",
-              position: "relative", // Ensures the IconButton positions relative to this Box
-              width: "100%", // Match Avatar dimensions
+              position: "relative",
+              width: "100%",
               height: 80,
             }}
           >
@@ -179,7 +179,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                backgroundColor: "rgba(255, 255, 255, 0.7)", // Slightly transparent background
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
                 borderRadius: "50%",
                 "&:hover": {
                   backgroundColor: "rgba(255, 255, 255, 0.7)",
@@ -207,7 +207,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                   backdropFilter: "blur(10px)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    border: "none", // Remove border
+                    border: "none",
                   },
                   direction: direction,
                 },
@@ -233,7 +233,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                   backdropFilter: "blur(10px)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    border: "none", // Remove border
+                    border: "none",
                   },
                 },
               }}
@@ -259,7 +259,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                     backdropFilter: "blur(10px)",
                     "& .MuiOutlinedInput-notchedOutline": {
-                      border: "none", // Remove border
+                      border: "none",
                     },
                   },
                 }}
