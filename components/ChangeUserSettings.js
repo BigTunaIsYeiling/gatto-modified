@@ -176,7 +176,6 @@ export default function EditUser({ data }) {
             sx={{ width: "100%" }}
             value={NewBio}
             onChange={handleTextChange}
-            onKeyDown={(e) => e.stopPropagation()}
             name="bio"
           />
         </Box>
@@ -200,7 +199,6 @@ export default function EditUser({ data }) {
             onChange={(e) => setUsername(e.target.value)}
             sx={{ width: "100%" }}
             autoComplete="username"
-            onKeyDown={(e) => e.stopPropagation()}
             name="username"
           />
         </Box>
@@ -226,7 +224,6 @@ export default function EditUser({ data }) {
               value={NewPassword}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="new-password"
-              onKeyDown={(e) => e.stopPropagation()}
               name="password"
             />
             <IconButton
