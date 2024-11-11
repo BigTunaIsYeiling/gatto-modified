@@ -6,10 +6,9 @@ import BackgroundTokenRefresher from "./TokenRefreshcomponent";
 import GuestNavBar from "./UnloggedNavBar";
 
 const UserLayout = ({ children, data }) => {
-  
+
   const [hydratedData, setHydratedData] = useState(null);
   useEffect(() => {
-    // Setting client-only data here
     setHydratedData(data);
   }, [data]);
 
