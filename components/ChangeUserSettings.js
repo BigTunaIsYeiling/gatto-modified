@@ -16,11 +16,16 @@ import { CiSettings } from "react-icons/ci";
 import { AiOutlineClose } from "react-icons/ai";
 import { styled } from "@mui/system";
 import { TbCameraMinus } from "react-icons/tb";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import ConfirmDialog from "./UserConfirmDialog";
+import dynamic from "next/dynamic";
 import { ChangeUserSettingsAction } from "@/lib/userActions";
 import toast from "react-hot-toast";
+
+const ConfirmDialog = dynamic(() => import("./UserConfirmDialog"), {
+  ssr: false,
+});
+
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -36,52 +41,58 @@ const GlassButton = styled(Button)({
   },
 });
 
-export default function UserDialog({ isTwitter, username, avatar }) {
+const UserDialog = ({ isTwitter, username, avatar }) => {
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setRev(null);
-    setAvatarFile(null);
-    setUsername("");
-    setBio("");
-    setPassword("");
-  };
   const [rev, setRev] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
   const [NewUsername, setUsername] = useState("");
   const [NewBio, setBio] = useState("");
   const [direction, setDirection] = useState("ltr");
   const [NewPassword, setPassword] = useState("");
-  const DisplayAvatar = (file) => {
+
+  const togglePasswordVisibility = useCallback(() => {
+    setShowPassword((prev) => !prev);
+  }, []);
+
+  const handleClickOpen = useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    setRev(null);
+    setAvatarFile(null);
+    setUsername("");
+    setBio("");
+    setPassword("");
+  }, []);
+
+  const DisplayAvatar = useCallback((file) => {
     setRev(URL.createObjectURL(file));
-  };
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    setAvatarFile(file);
-    if (file) {
-      DisplayAvatar(file);
-    }
-  };
-  const handleTextChange = (e) => {
+  }, []);
+
+  const handleAvatarChange = useCallback(
+    (e) => {
+      const file = e.target.files[0];
+      setAvatarFile(file);
+      if (file) {
+        DisplayAvatar(file);
+      }
+    },
+    [DisplayAvatar]
+  );
+
+  const handleTextChange = useCallback((e) => {
     const value = e.target.value;
     setBio(value);
-
-    // Set direction based on input language
     if (/[\u0600-\u06FF]/.test(value.trim().charAt(0))) {
-      // Arabic Unicode range
       setDirection("rtl");
     } else {
       setDirection("ltr");
     }
-  };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -89,9 +100,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
     formData.append("password", NewPassword);
     formData.append("bio", NewBio);
     formData.append("avatar", avatarFile);
-
     const result = await ChangeUserSettingsAction(formData);
-
     if (result.success) {
       toast.success("User settings updated successfully");
       handleClose();
@@ -99,6 +108,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
       toast.error(result.errors[0]);
     }
   };
+
   return (
     <>
       <MenuItem
@@ -107,8 +117,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
       >
         <Stack direction={"column"}>
           <Typography variant="body2">
-            {username.slice(0, 9)}
-            {username.length > 9 && ".."}
+            {username.slice(0, 9)} {username.length > 9 && ".."}
           </Typography>
           <Typography color="#777" variant="body2">
             {isTwitter ? "Twitter User" : "PurrGato User"}
@@ -123,11 +132,11 @@ export default function UserDialog({ isTwitter, username, avatar }) {
         onClose={handleClose}
         PaperProps={{
           sx: {
-            background: "#FFFCF2", // Gradient background
+            background: "#FFFCF2",
             borderRadius: { xs: "10px", sm: "10px" },
             padding: "10px",
-            height: { xs: "100%", sm: "auto" }, // Full height on small screens, auto on larger
-            width: { xs: "100%", sm: 500 }, // Full width on small screens, 600px on larger
+            height: { xs: "100%", sm: "auto" },
+            width: { xs: "100%", sm: 500 },
             overflowX: "hidden",
           },
         }}
@@ -162,8 +171,8 @@ export default function UserDialog({ isTwitter, username, avatar }) {
               alignItems: "center",
               mb: 2,
               justifyContent: "center",
-              position: "relative", // Ensures the IconButton positions relative to this Box
-              width: "100%", // Match Avatar dimensions
+              position: "relative",
+              width: "100%",
               height: 80,
             }}
           >
@@ -179,7 +188,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                backgroundColor: "rgba(255, 255, 255, 0.7)", // Slightly transparent background
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
                 borderRadius: "50%",
                 "&:hover": {
                   backgroundColor: "rgba(255, 255, 255, 0.7)",
@@ -207,7 +216,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                   backdropFilter: "blur(10px)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    border: "none", // Remove border
+                    border: "none",
                   },
                   direction: direction,
                 },
@@ -233,7 +242,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                   backdropFilter: "blur(10px)",
                   "& .MuiOutlinedInput-notchedOutline": {
-                    border: "none", // Remove border
+                    border: "none",
                   },
                 },
               }}
@@ -259,7 +268,7 @@ export default function UserDialog({ isTwitter, username, avatar }) {
                     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                     backdropFilter: "blur(10px)",
                     "& .MuiOutlinedInput-notchedOutline": {
-                      border: "none", // Remove border
+                      border: "none",
                     },
                   },
                 }}
@@ -308,4 +317,6 @@ export default function UserDialog({ isTwitter, username, avatar }) {
       </Dialog>
     </>
   );
-}
+};
+
+export default UserDialog;
