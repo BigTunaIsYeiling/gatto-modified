@@ -48,10 +48,6 @@ const Notification = ({ notification }) => {
         position: "relative",
         cursor: "pointer",
       }}
-      component={Link}
-      prefetch={true}
-      scroll={false}
-      href={notification.notLink}
     >
       <Box
         sx={{
@@ -60,6 +56,10 @@ const Notification = ({ notification }) => {
           mb: 2,
           position: "relative",
         }}
+        component={Link}
+        prefetch={true}
+        scroll={false}
+        href={notification.notLink}
       >
         <Box sx={{ position: "relative", display: "inline-flex" }}>
           <Avatar
