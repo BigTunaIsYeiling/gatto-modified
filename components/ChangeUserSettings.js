@@ -225,7 +225,7 @@ export default function EditUser({ data }) {
               sx={{ width: "100%" }}
               value={NewPassword}
               onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
+              autoComplete="off"
               name="password"
             />
             <IconButton
