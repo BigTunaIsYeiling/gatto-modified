@@ -1,8 +1,7 @@
 "use client";
 import { Box, Button } from "@mui/material";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 export default function GuestNavBar() {
-  const router = useRouter();
   return (
     <Button
       sx={{
@@ -22,7 +21,9 @@ export default function GuestNavBar() {
         top: 16,
         zIndex: 10,
       }}
-      onClick={() => router.push("/register")}
+      component={Link}
+      href="/register"
+      prefetch={true}
     >
       <Box color={"black"} fontWeight={"500"}>
         Join As A Member
