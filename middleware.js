@@ -21,6 +21,6 @@ export async function middleware(request) {
   }
 }
 
-// export const config = {
-//   matcher: ["/", "/messages"],
-// };
+export const config = {
+  matcher: ["/", "/messages","/notifications"],
+};
