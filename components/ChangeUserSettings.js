@@ -183,15 +183,17 @@ export default function EditUser({ data }) {
           <TextField
             variant="outlined"
             placeholder="New Username"
-            InputProps={{
-              sx: {
-                borderRadius: "25px",
-                backgroundColor: "white",
-                padding: "2px",
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                backdropFilter: "blur(10px)",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "none",
+            slotProps={{
+              input: {
+                sx: {
+                  borderRadius: "25px",
+                  backgroundColor: "white",
+                  padding: "2px",
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                  backdropFilter: "blur(10px)",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
                 },
               },
             }}
