@@ -102,14 +102,20 @@ const Notification = ({ notification }) => {
           )}
         </Box>
         <Box>
-          <Typography variant="body2" sx={{ fontWeight: 600, color: "#333" }}>
+          <Typography
+            variant="body2"
+            sx={{ fontWeight: 600, color: "#333", textDecoration: "none" }}
+          >
             {notification.content}
             {notification.type === "reply" &&
               `${notification.fromUser.username} replied to your message '${notification.message.title}'`}
             {notification.type === "like" &&
               `${notification.fromUser.username} Liked your post '${notification.post.title}'`}
           </Typography>
-          <Typography variant="caption" sx={{ color: "#666" }}>
+          <Typography
+            variant="caption"
+            sx={{ color: "#666", textDecoration: "none" }}
+          >
             {formatDate()}
           </Typography>
         </Box>
