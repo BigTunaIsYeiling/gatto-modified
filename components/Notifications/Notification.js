@@ -122,6 +122,7 @@ const Notification = ({ notification }) => {
           sx={{ textDecoration: "none" }}
           component={Link}
           prefetch={true}
+          scroll={false}
           href={notification.notLink}
         >
           View

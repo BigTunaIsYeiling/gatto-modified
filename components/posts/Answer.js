@@ -192,6 +192,7 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
               component={Link}
               href={`/${useridPosts}/post/${post.postId}`}
               prefetch={true}
+              scroll={false}
             >
               <Typography variant="body2">Thread</Typography>
               <ListItemIcon>

@@ -24,6 +24,7 @@ export default function GuestNavBar() {
       component={Link}
       href="/register"
       prefetch={true}
+      scroll={false}
     >
       <Box color={"black"} fontWeight={"500"}>
         Join As A Member

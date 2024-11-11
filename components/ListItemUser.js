@@ -19,6 +19,7 @@ export default function ListItemUser({ user }) {
       component={Link}
       href={`/${user.id}`}
       prefetch={true}
+      scroll={false}
     >
       <ListItemAvatar>
         <Avatar

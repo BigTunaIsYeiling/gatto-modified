@@ -38,6 +38,7 @@ export default function PostOnePosts({
           component={Link}
           href={`/${userid}`}
           prefetch={true}
+          scroll={false}
         >
           View {data.username + "'s"} All Answers
         </GlassButton>
