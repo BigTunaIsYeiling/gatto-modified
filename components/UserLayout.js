@@ -6,8 +6,8 @@ import BackgroundTokenRefresher from "./TokenRefreshcomponent";
 import GuestNavBar from "./UnloggedNavBar";
 
 const UserLayout = ({ children, data }) => {
+  
   const [hydratedData, setHydratedData] = useState(null);
-
   useEffect(() => {
     // Setting client-only data here
     setHydratedData(data);
@@ -23,7 +23,7 @@ const UserLayout = ({ children, data }) => {
         position: "relative",
       }}
     >
-      {data == "guest" ? (
+      {!data.id ? (
         <GuestNavBar />
       ) : (
         <NavBar
@@ -42,8 +42,8 @@ const UserLayout = ({ children, data }) => {
           padding: 2,
           overflowY: "auto",
           zIndex: 1,
-          marginTop: data == "guest" ? "-80px" : "-100px",
-          paddingTop: data == "guest" ? "80px" : "100px",
+          marginTop: !data.id ? "-80px" : "-100px",
+          paddingTop: !data.id ? "80px" : "100px",
         }}
       >
         <BackgroundTokenRefresher />
