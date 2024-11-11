@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function middleware(request) {
+  console.log("Middleware triggered for:", request.nextUrl.pathname);
   const token = request.cookies.get("token");
   if (!token) {
     return NextResponse.redirect(new URL("/register", request.url));
@@ -20,6 +21,6 @@ export async function middleware(request) {
   }
 }
 
-export const config = {
-  matcher: ["/", "/messages", "/notifications"],
-};
+// export const config = {
+//   matcher: ["/", "/messages", "/notifications"],
+// };
