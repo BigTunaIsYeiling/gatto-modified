@@ -107,12 +107,19 @@ export default function EditUser({ data }) {
             height: 80,
           }}
         >
-          <Avatar
-            src={rev ? rev : data.avatar}
-            alt="Upload Photo"
-            sx={{ width: 80, height: 80 }}
-          />
-
+          <Box
+            p={1}
+            sx={{
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            }}
+            borderRadius={"50%"}
+          >
+            <Avatar
+              src={rev ? rev : data.avatar}
+              alt="Upload Photo"
+              sx={{ width: 80, height: 80 }}
+            />
+          </Box>
           <IconButton
             component="label"
             sx={{
