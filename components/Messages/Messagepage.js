@@ -5,7 +5,17 @@ const MessagesPage = ({ data }) => {
   return (
     <Container>
       <Box sx={{ mt: 4 }}>
-        <Typography variant="h4" sx={{ mb: 2, color: "#333", fontWeight: 600 }}>
+        <Typography
+          sx={{
+            mb: 2,
+            color: "#333",
+            fontWeight: 600,
+            typography: {
+              xs: "h5",
+              sm: "h4",
+            },
+          }}
+        >
           Inbox
         </Typography>
         <MessageList data={data} />
