@@ -11,7 +11,7 @@ const LoadingScreen = () => (
       left: 0,
       width: "100%",
       height: "100%",
-      background: "linear-gradient(180deg, #ffffff, #ffdda1)",
+      // background: "linear-gradient(180deg, #ffffff, #ffdda1)",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
