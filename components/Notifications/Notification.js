@@ -97,7 +97,7 @@ const Notification = ({ notification }) => {
                 justifyContent: "center",
               }}
             >
-              <RiQuestionAnswerFill size={16} color="#ffba6d" />
+              <RiQuestionAnswerFill size={16} color="rgb(247,152,18)" />
             </Box>
           )}
         </Box>
