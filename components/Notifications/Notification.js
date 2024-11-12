@@ -52,7 +52,6 @@ const Notification = ({ notification }) => {
         sx={{
           display: "flex",
           alignItems: "center",
-          mb: 2,
           position: "relative",
           textDecoration: "none",
         }}
