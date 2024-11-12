@@ -40,7 +40,7 @@ const Notification = ({ notification }) => {
     <Paper
       sx={{
         mb: 2,
-        p: 3,
+        p: { xs: 2, sm: 3 },
         borderRadius: "16px",
         backgroundColor: "#fffcf2",
         border: "1px solid rgba(255, 255, 255, 0.3)",
