@@ -9,7 +9,7 @@ const MessagesPage = ({ data }) => {
           sx={{
             mb: 2,
             color: "#333",
-            fontWeight: 600,
+            fontWeight: "500",
             typography: {
               xs: "h5",
               sm: "h4",

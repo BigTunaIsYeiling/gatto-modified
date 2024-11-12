@@ -31,6 +31,7 @@ export default function Home({ usersData }) {
             xs: "h5",
             sm: "h4",
           },
+          fontWeight: "500",
         }}
       >
         Welcome to PurrGatto!
