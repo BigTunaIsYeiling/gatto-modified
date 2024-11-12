@@ -65,7 +65,7 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
       <Box
         sx={{
           mb: 3,
-          p: 3,
+          p: { xs: 2, sm: 3 },
           borderRadius: "20px",
           background: "#fffcf2",
           border: "1px solid rgba(255, 255, 255, 0.5)",

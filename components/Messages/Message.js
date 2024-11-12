@@ -22,7 +22,7 @@ const Message = ({ message, date, id, post, parentPost }) => {
     <Paper
       sx={{
         mb: 2,
-        p: 3,
+        p: { xs: 2, sm: 3 },
         borderRadius: "16px",
         backgroundColor: "#fffcf2", // Frosted glass effect
         backdropFilter: "blur(10px)",

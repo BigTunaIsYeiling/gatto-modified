@@ -16,7 +16,16 @@ const MessageList = ({ data }) => {
           />
         ))
       ) : (
-        <Typography variant="h6">No Messages For Now</Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            "&.MuiTypography-root": {
+              fontWeight: "400",
+            },
+          }}
+        >
+          No Messages For Now
+        </Typography>
       )}
     </Box>
   );

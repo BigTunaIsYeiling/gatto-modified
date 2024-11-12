@@ -9,7 +9,16 @@ const NotificationList = ({ data }) => {
           <Notification key={notif.id} notification={notif} />
         ))
       ) : (
-        <Typography variant="h6">No Notifications For Now</Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            "&.MuiTypography-root": {
+              fontWeight: "400",
+            },
+          }}
+        >
+          No Notifications For Now
+        </Typography>
       )}
     </Box>
   );

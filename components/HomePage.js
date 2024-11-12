@@ -20,7 +20,7 @@ export default function Home({ usersData }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        mt: 4,
+        mt: 10,
       }}
     >
       <Typography
@@ -28,13 +28,15 @@ export default function Home({ usersData }) {
           mb: 3,
           textAlign: "center",
           typography: {
-            xs: "h5",
+            xs: "h4",
             sm: "h4",
           },
-          fontWeight: "500",
+          "&.MuiTypography-root": {
+            fontWeight: "400",
+          },
         }}
       >
-        Welcome to PurrGatto!
+        Always in Stealth!
       </Typography>
       <Box
         sx={{

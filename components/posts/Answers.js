@@ -10,7 +10,16 @@ export default function Answers({
   return (
     <>
       <Box sx={{ width: "100%", maxWidth: 600, textAlign: "left" }}>
-        <Typography sx={{ mt: 4, mb: 2, fontWeight: "500", typography: "h6" }}>
+        <Typography
+          sx={{
+            mt: 4,
+            mb: 2,
+            typography: "h6",
+            "&.MuiTypography-root": {
+              fontWeight: "400",
+            },
+          }}
+        >
           Answers {PostsData.AllAnswers}
         </Typography>
       </Box>
