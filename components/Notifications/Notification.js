@@ -40,7 +40,7 @@ const Notification = ({ notification }) => {
     <Paper
       sx={{
         mb: 2,
-        p: { xs: 2, sm: 3 },
+        p: 3,
         borderRadius: "16px",
         backgroundColor: "#fffcf2",
         border: "1px solid rgba(255, 255, 255, 0.3)",
@@ -52,13 +52,10 @@ const Notification = ({ notification }) => {
         sx={{
           display: "flex",
           alignItems: "center",
+          mb: 2,
           position: "relative",
           textDecoration: "none",
         }}
-        component={Link}
-        prefetch={true}
-        scroll={false}
-        href={notification.notLink}
       >
         <Box sx={{ position: "relative", display: "inline-flex" }}>
           <Avatar
@@ -97,12 +94,25 @@ const Notification = ({ notification }) => {
                 justifyContent: "center",
               }}
             >
-              <RiQuestionAnswerFill size={16} color="rgb(247,152,18)" />
+              <RiQuestionAnswerFill size={16} color="#ffba6d" />
             </Box>
           )}
         </Box>
-        <Box>
-          <Typography variant="body2" sx={{ fontWeight: 600, color: "#333" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{ fontWeight: 600, color: "#333", textDecoration: "none" }}
+            component={Link}
+            prefetch={true}
+            scroll={false}
+            href={notification.notLink}
+          >
             {notification.content}
             {notification.type === "reply" &&
               `${notification.fromUser.username} replied to your message '${notification.message.title}'`}

@@ -8,6 +8,7 @@
   background: linear-gradient(180deg, #ffffff, #ffdda1);
   height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }

@@ -6,7 +6,6 @@ import BackgroundTokenRefresher from "./TokenRefreshcomponent";
 import GuestNavBar from "./UnloggedNavBar";
 
 const UserLayout = ({ children, data }) => {
-
   const [hydratedData, setHydratedData] = useState(null);
   useEffect(() => {
     setHydratedData(data);
@@ -43,6 +42,7 @@ const UserLayout = ({ children, data }) => {
           zIndex: 1,
           marginTop: !data.id ? "-80px" : "-100px",
           paddingTop: !data.id ? "80px" : "100px",
+          overflowX: "hidden",
         }}
       >
         <BackgroundTokenRefresher />
