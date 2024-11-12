@@ -1,30 +1,19 @@
 "use client";
-import { Box, Typography, Paper, Avatar, Divider, Button } from "@mui/material";
+import { Box, Typography, Paper, Avatar } from "@mui/material";
 import { IoMdHeart } from "react-icons/io";
 import { RiQuestionAnswerFill } from "react-icons/ri";
-import styled from "@emotion/styled";
 import { format, formatDistanceToNow } from "date-fns";
-import ConfirmDialog from "./DeleteNotification";
 import Link from "next/link";
-const GlassButton = styled(Button)({
-  background: "rgba(255, 255, 255, 0.25)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(255, 255, 255, 0.3)",
-  borderRadius: "10px",
-  color: "black",
-  padding: "5px 10px",
-  textTransform: "none",
-  fontSize: "14px",
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  display: "flex",
-  alignItems: "center",
-  "&:hover": {
-    background: "rgba(255, 255, 255, 0.3)",
-  },
-});
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const Notification = ({ notification }) => {
   const createdAt = new Date(notification.createdAt);
+
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: notification.id,
+    });
 
   const formatDate = () => {
     const now = new Date();
@@ -36,8 +25,16 @@ const Notification = ({ notification }) => {
       return format(createdAt, "MM/dd/yyyy");
     }
   };
+
   return (
     <Paper
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+      }}
+      {...attributes}
+      {...listeners}
       sx={{
         mb: 2,
         p: 3,
@@ -59,9 +56,9 @@ const Notification = ({ notification }) => {
       >
         <Box sx={{ position: "relative", display: "inline-flex" }}>
           <Avatar
-            src={notification.fromUser.avatar} // Placeholder for anon photo
+            src={notification.fromUser.avatar}
             alt="Anonymous"
-            sx={{ width: 60, height: 60, mr: 2 }} // Adjust avatar size
+            sx={{ width: 60, height: 60, mr: 2 }}
           />
           {notification.type === "like" && (
             <Box
@@ -124,25 +121,6 @@ const Notification = ({ notification }) => {
           </Typography>
         </Box>
       </Box>
-      {/* <Divider sx={{ mb: 1 }} />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <GlassButton
-          sx={{ textDecoration: "none" }}
-          component={Link}
-          prefetch={true}
-          scroll={false}
-          href={notification.notLink}
-        >
-          View
-        </GlassButton>
-        <ConfirmDialog id={notification.id} />
-      </Box> */}
     </Paper>
   );
 };
