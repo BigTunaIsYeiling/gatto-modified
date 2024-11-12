@@ -4,16 +4,8 @@ import { IoMdHeart } from "react-icons/io";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import { format, formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-
 const Notification = ({ notification }) => {
   const createdAt = new Date(notification.createdAt);
-
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: notification.id,
-    });
 
   const formatDate = () => {
     const now = new Date();
@@ -25,19 +17,11 @@ const Notification = ({ notification }) => {
       return format(createdAt, "MM/dd/yyyy");
     }
   };
-
   return (
     <Paper
-      ref={setNodeRef}
-      style={{
-        transform: CSS.Transform.toString(transform),
-        transition,
-      }}
-      {...attributes}
-      {...listeners}
       sx={{
         mb: 2,
-        p: 3,
+        p: { xs: 1.5, sm: 3 },
         borderRadius: "16px",
         backgroundColor: "#fffcf2",
         border: "1px solid rgba(255, 255, 255, 0.3)",
@@ -49,16 +33,15 @@ const Notification = ({ notification }) => {
         sx={{
           display: "flex",
           alignItems: "center",
-          mb: 2,
           position: "relative",
           textDecoration: "none",
         }}
       >
         <Box sx={{ position: "relative", display: "inline-flex" }}>
           <Avatar
-            src={notification.fromUser.avatar}
+            src={notification.fromUser.avatar} // Placeholder for anon photo
             alt="Anonymous"
-            sx={{ width: 60, height: 60, mr: 2 }}
+            sx={{ width: 60, height: 60, mr: 2 }} // Adjust avatar size
           />
           {notification.type === "like" && (
             <Box
@@ -121,6 +104,25 @@ const Notification = ({ notification }) => {
           </Typography>
         </Box>
       </Box>
+      {/* <Divider sx={{ mb: 1 }} />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <GlassButton
+          sx={{ textDecoration: "none" }}
+          component={Link}
+          prefetch={true}
+          scroll={false}
+          href={notification.notLink}
+        >
+          View
+        </GlassButton>
+        <ConfirmDialog id={notification.id} />
+      </Box> */}
     </Paper>
   );
 };
