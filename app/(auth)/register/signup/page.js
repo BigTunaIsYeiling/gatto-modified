@@ -7,6 +7,7 @@ import {
   Divider,
   Stack,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import { FaXTwitter } from "react-icons/fa6";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
@@ -63,13 +64,15 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSignup = async () => {
+    setLoading(true);
     const res = await Register(username, password);
+    setLoading(false);
     if (res.success) {
       router.push("/");
     } else {
@@ -141,8 +144,13 @@ const Signup = () => {
             fullWidth
             sx={{ mt: { xs: 2, md: 3 } }}
             onClick={handleSignup}
+            disabled={loading}
           >
-            Sign Up
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Sign Up"
+            )}
           </GlassButton>
           <Typography
             variant="body2"

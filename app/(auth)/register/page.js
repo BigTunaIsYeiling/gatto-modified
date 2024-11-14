@@ -7,6 +7,7 @@ import {
   IconButton,
   Divider,
   Stack,
+  CircularProgress,
 } from "@mui/material";
 import Link from "next/link";
 import { FaXTwitter } from "react-icons/fa6";
@@ -73,8 +74,11 @@ const Login = () => {
   const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleLogin = async () => {
+    setLoading(true);
     const res = await loginAction(username, password);
+    setLoading(false);
     if (res.success) {
       router.push("/");
     } else {
@@ -150,9 +154,14 @@ const Login = () => {
           <GlassButton
             fullWidth
             onClick={handleLogin}
+            disabled={loading}
             sx={{ mt: { xs: 2, md: 3 } }}
           >
-            Log In
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Log In"
+            )}
           </GlassButton>
           <Typography
             variant="body2"
