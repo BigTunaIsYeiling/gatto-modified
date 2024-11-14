@@ -1,7 +1,6 @@
 "use client";
 import styled from "@emotion/styled";
 import { Box, Button, Divider, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { SubAnswer } from "./SubAnswer";
 import Link from "next/link";
 const GlassButton = styled(Button)({
@@ -28,7 +27,6 @@ export default function PostOnePosts({
   posts,
   userData,
 }) {
-  const router = useRouter();
   return (
     <Box my={2} sx={{ width: "100%", maxWidth: 600 }}>
       <Divider />
