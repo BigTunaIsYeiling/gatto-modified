@@ -26,6 +26,7 @@ export const SubAnswer = ({
   useridPosts,
   isSubAnswer,
   postParam,
+  setposts,
 }) => {
   const [isLiked, setIsLiked] = useState(post.likes.includes(userid));
   const [likesCount, setLikesCount] = useState(post.likes.length);
@@ -213,6 +214,7 @@ export const SubAnswer = ({
                 postParam={postParam}
                 postId={post.postId}
                 RouteuserId={useridPosts}
+                setposts={setposts}
               />
             </Menu>
           </>

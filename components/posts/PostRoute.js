@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import { SubAnswer } from "./SubAnswer";
 import Link from "next/link";
+import { useState } from "react";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -27,6 +28,7 @@ export default function PostOnePosts({
   posts,
   userData,
 }) {
+  const [PostsData, setPosts] = useState(posts);
   return (
     <Box my={2} sx={{ width: "100%", maxWidth: 600 }}>
       <Divider />
@@ -45,7 +47,7 @@ export default function PostOnePosts({
       </Box>
       <Box sx={{ width: "100%", maxWidth: 600 }}>
         {Array.isArray(posts) && posts.length > 0 ? (
-          posts.map((post) => (
+          PostsData.map((post) => (
             <SubAnswer
               key={post.postId}
               post={post}
@@ -55,6 +57,7 @@ export default function PostOnePosts({
               useridPosts={userid}
               isSubAnswer={post.isSubAnswer}
               postParam={postid}
+              setposts={setPosts}
             />
           ))
         ) : (
