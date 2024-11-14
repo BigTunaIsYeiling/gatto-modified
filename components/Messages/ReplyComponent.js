@@ -32,7 +32,7 @@ const GlassButton = styled(Button)({
   },
 });
 
-export default function ReplyComponent({ content, id }) {
+export default function ReplyComponent({ content, id, setMessages }) {
   const [open, setOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [direction, setDirection] = useState("ltr");
@@ -52,6 +52,7 @@ export default function ReplyComponent({ content, id }) {
     const res = await AddPost(body);
     setLoading(false);
     if (res.success) {
+      setMessages((prev) => prev.filter((msg) => msg.id !== id));
       toast.success("Post added successfully");
       setReplyText("");
       return handleClose();

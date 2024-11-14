@@ -20,7 +20,14 @@ import ReAsk from "./ReAsk";
 import { LikePostAction } from "@/lib/postsActions";
 import Link from "next/link";
 import { RiTwitterXLine } from "react-icons/ri";
-export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
+export const Answer = ({
+  post,
+  avatar,
+  username,
+  userid,
+  useridPosts,
+  setposts,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   // Local states to handle like status and count
   const [isLiked, setIsLiked] = useState(post.likes.includes(userid));
@@ -172,7 +179,6 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
               postId={post.postId}
             />
           </Stack>
-
           <IconButton onClick={handleMenuClick} sx={{ color: "#6A6A6A" }}>
             <PiDotsThreeOutlineLight />
           </IconButton>
@@ -218,7 +224,7 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
             )}
             {useridPosts == userid && <Divider />}
             {useridPosts == userid && (
-              <ConfirmDialog useridPosts={useridPosts} postId={post.postId} />
+              <ConfirmDialog useridPosts={useridPosts} postId={post.postId} setposts={setposts} />
             )}
           </Menu>
         </Box>

@@ -1,12 +1,14 @@
 "use client";
 import { Box, Typography } from "@mui/material";
 import { Answer } from "./Answer";
+import { useState } from "react";
 export default function Answers({
   userid,
   RouteUserdata,
   PostsData,
   SignedUser,
 }) {
+  const [posts, setposts] = useState(PostsData.PostsData);
   return (
     <>
       <Box sx={{ width: "100%", maxWidth: 600, textAlign: "left" }}>
@@ -26,7 +28,7 @@ export default function Answers({
       <Box sx={{ width: "100%", maxWidth: 600 }}>
         {Array.isArray(PostsData.PostsData) &&
         PostsData.PostsData.length > 0 ? (
-          PostsData.PostsData.map((post) => (
+          posts.map((post) => (
             <Answer
               key={post.postId}
               post={post}
@@ -34,6 +36,7 @@ export default function Answers({
               useridPosts={userid}
               avatar={RouteUserdata.avatar}
               username={RouteUserdata.username}
+              setposts={setposts}
             />
           ))
         ) : (

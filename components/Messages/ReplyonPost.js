@@ -32,7 +32,7 @@ const GlassButton = styled(Button)({
   },
 });
 
-export default function ReplyOnPost({ content, id, parentpost }) {
+export default function ReplyOnPost({ content, id, parentpost, SetMessages }) {
   const [open, setOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [direction, setDirection] = useState("ltr");
@@ -53,6 +53,7 @@ export default function ReplyOnPost({ content, id, parentpost }) {
     const res = await AddPostForReply(body);
     setLoading(false);
     if (res.success) {
+      SetMessages((prev) => prev.filter((msg) => msg.id !== id));
       toast.success("Post added successfully");
       setReplyText("");
       return handleClose();

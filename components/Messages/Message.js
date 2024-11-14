@@ -1,11 +1,10 @@
 "use client";
 import { Box, Typography, Paper, Avatar, Divider, Stack } from "@mui/material";
-import Image from "next/image";
 import { format, formatDistanceToNow } from "date-fns";
 import ReplyComponent from "./ReplyComponent";
 import ReplyOnPost from "./ReplyonPost";
 import ConfirmDialog from "./DeleteMessage";
-const Message = ({ message, date, id, post, parentPost }) => {
+const Message = ({ message, date, id, post, parentPost, setMessages }) => {
   const createdAt = new Date(date);
 
   const formatDate = () => {
@@ -80,11 +79,16 @@ const Message = ({ message, date, id, post, parentPost }) => {
         }}
       >
         {!post ? (
-          <ReplyComponent content={message} id={id} />
+          <ReplyComponent content={message} id={id} setMessages={setMessages} />
         ) : (
-          <ReplyOnPost content={message} id={id} parentpost={parentPost} />
+          <ReplyOnPost
+            content={message}
+            id={id}
+            parentpost={parentPost}
+            SetMessages={setMessages}
+          />
         )}
-        <ConfirmDialog messageId={id} />
+        <ConfirmDialog messageId={id} setMessages={setMessages} />
       </Box>
     </Paper>
   );

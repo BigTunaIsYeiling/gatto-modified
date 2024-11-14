@@ -11,7 +11,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
-const ConfirmDialog = ({ messageId }) => {
+const ConfirmDialog = ({ messageId, setMessages }) => {
   const [open, setOpen] = useState(false);
   const onClose = () => {
     setOpen(false);
@@ -23,6 +23,7 @@ const ConfirmDialog = ({ messageId }) => {
   const DeleteMessage = async () => {
     const res = await DeleteMessageAction(messageId);
     if (res.success) {
+      setMessages((prev) => prev.filter((msg) => msg.id !== messageId));
       toast.success("Message deleted successfully");
       onClose();
     }

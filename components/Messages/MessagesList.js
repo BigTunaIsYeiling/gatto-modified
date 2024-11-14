@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import Message from "./Message";
-
+import { useState } from "react";
 const MessageList = ({ data }) => {
+  const [messages, setMessages] = useState(data);
   return (
     <Box>
       {data.length != 0 ? (
-        data.map((msg, index) => (
+        messages.map((msg, index) => (
           <Message
             key={msg.id}
             message={msg.content}
@@ -13,6 +14,7 @@ const MessageList = ({ data }) => {
             id={msg.id}
             post={msg.post}
             parentPost={msg.parentPost}
+            setMessages={setMessages}
           />
         ))
       ) : (

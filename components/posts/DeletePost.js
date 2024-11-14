@@ -12,7 +12,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
-const ConfirmDialog = ({ postId, useridPosts }) => {
+const ConfirmDialog = ({ postId, useridPosts, setposts }) => {
   const [open, setOpen] = useState(false);
   const onClose = () => {
     setOpen(false);
@@ -23,6 +23,9 @@ const ConfirmDialog = ({ postId, useridPosts }) => {
   const DeletePost = async () => {
     const res = await DeletePostAction({ postId, useridPosts });
     if (res.success) {
+      setposts((prevPosts) =>
+        prevPosts.filter((post) => post.postId !== postId)
+      );
       toast.success("Post deleted successfully");
       return onClose();
     }
