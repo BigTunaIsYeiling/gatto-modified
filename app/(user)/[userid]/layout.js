@@ -40,12 +40,10 @@ export async function generateMetadata({ params }) {
 
 export default async function Layout({ children, params }) {
   const { userid } = await params;
-
   const [routeUserData, signedUserData] = await Promise.all([
     GetRouteData(userid),
     GetUserData(),
   ]);
-
   return (
     <UserProfile
       data={routeUserData || {}}

@@ -8,6 +8,7 @@ import {
   Divider,
   Avatar,
   TextField,
+  CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { TbCameraMinus } from "react-icons/tb";
@@ -42,6 +43,7 @@ export default function EditUser({ data }) {
   const [NewBio, setBio] = useState("");
   const [direction, setDirection] = useState("ltr");
   const [NewPassword, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const DisplayAvatar = (file) => {
     setRev(URL.createObjectURL(file));
   };
@@ -70,8 +72,9 @@ export default function EditUser({ data }) {
     formData.append("bio", NewBio);
     formData.append("avatar", avatarFile);
 
+    setLoading(true);
     const result = await ChangeUserSettingsAction(formData);
-
+    setLoading(false);
     if (result.success) {
       toast.success("User settings updated successfully");
       setRev(null);
@@ -252,13 +255,18 @@ export default function EditUser({ data }) {
             type="submit"
             sx={{ alignSelf: "flex-end" }}
             disabled={
-              NewUsername == "" &&
-              NewPassword == "" &&
-              NewBio == "" &&
-              !avatarFile
+              (NewUsername == "" &&
+                NewPassword == "" &&
+                NewBio == "" &&
+                !avatarFile) ||
+              loading
             }
           >
-            Apply
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Submit"
+            )}
           </GlassButton>
         </Stack>
       </Box>

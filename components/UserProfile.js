@@ -8,6 +8,7 @@ import {
   styled,
   Button,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import toast from "react-hot-toast";
 import { SendMessage } from "@/lib/MessagesActions";
@@ -33,7 +34,9 @@ const GlassButton = styled(Button)({
 const UserProfile = ({ children, data, userid, userdata }) => {
   const [message, setMessage] = useState("");
   const [direction, setDirection] = useState("ltr");
+  const [loading, setLoading] = useState(false);
   const SendMessageRequest = async () => {
+    setLoading(true);
     const res = await SendMessage({
       body: {
         content: message,
@@ -41,6 +44,7 @@ const UserProfile = ({ children, data, userid, userdata }) => {
         receiverId: userid,
       },
     });
+    setLoading(false);
     if (res.success) {
       toast.success("Message sent successfully");
       setMessage("");
@@ -165,11 +169,11 @@ const UserProfile = ({ children, data, userid, userdata }) => {
         </Box>
         <Box sx={{ width: "100%", maxWidth: 600 }}>
           <GlassButton
-            disabled={message == ""}
+            disabled={message == "" || loading}
             onClick={SendMessageRequest}
             sx={{ width: "100%" }}
           >
-            Send
+            {loading ? <CircularProgress size={24} color="inherit" /> : "Send"}
           </GlassButton>
         </Box>
         {children}

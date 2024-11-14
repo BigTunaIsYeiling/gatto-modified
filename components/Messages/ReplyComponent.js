@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import { AiOutlineClose } from "react-icons/ai";
 import toast from "react-hot-toast";
@@ -35,6 +36,7 @@ export default function ReplyComponent({ content, id }) {
   const [open, setOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [direction, setDirection] = useState("ltr");
+  const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleOpen = () => {
@@ -42,11 +44,13 @@ export default function ReplyComponent({ content, id }) {
   };
   const handleClose = () => setOpen(false);
   const handleReply = async () => {
+    setLoading(true);
     const body = {
       PostBody: replyText,
       messageId: id,
     };
     const res = await AddPost(body);
+    setLoading(false);
     if (res.success) {
       toast.success("Post added successfully");
       setReplyText("");
@@ -189,7 +193,9 @@ export default function ReplyComponent({ content, id }) {
           </Box>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", p: 2 }}>
-          <GlassButton onClick={handleReply}>Send</GlassButton>
+          <GlassButton onClick={handleReply} disabled={loading}>
+            {loading ? <CircularProgress size={24} color="inherit" /> : "Send"}
+          </GlassButton>
         </Box>
       </Dialog>
     </>
