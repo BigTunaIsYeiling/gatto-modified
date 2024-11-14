@@ -19,17 +19,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/app/logo.png";
 import { IoIosLogOut } from "react-icons/io";
-import { CiSettings } from "react-icons/ci";
 import { IoShareOutline } from "react-icons/io5";
 import { logoutAction } from "@/lib/userActions";
-export default function NavBar({
-  avatar,
-  isTwitter,
-  username,
-  id,
-  messages,
-  notifications,
-}) {
+export default function NavBar({ avatar, id, messages, notifications }) {
   const router = useRouter();
   const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,37 +35,6 @@ export default function NavBar({
     const res = await logoutAction();
     if (res.success) {
       router.push("/register");
-    }
-  };
-  let isSharing = false;
-
-  const CopyShareProfile = async (id) => {
-    if (isSharing) {
-      console.warn("A share action is already in progress.");
-      return;
-    }
-    const url = `${window.location.origin}/${id}`;
-    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-      url
-    )}&text=Check out this profile!`;
-
-    isSharing = true;
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Check out this profile!",
-          text: "Check out this profile!",
-          url: twitterShareUrl,
-        });
-      } catch (err) {
-        console.error("Error sharing profile:", err);
-      } finally {
-        isSharing = false;
-      }
-    } else {
-      // Fallback for browsers that do not support navigator.share
-      window.open(twitterShareUrl, "_blank");
-      isSharing = false;
     }
   };
   return (
@@ -98,7 +59,6 @@ export default function NavBar({
       >
         <MenuItem
           sx={{ display: "flex", justifyContent: "space-between" }}
-          onClick={() => CopyShareProfile(id)}
         >
           <Typography variant="body2">Share profile</Typography>
           <ListItemIcon>
@@ -233,6 +193,7 @@ export default function NavBar({
                 color: "#FCE3CD",
               },
               display: { xs: "none", sm: "inline-flex " },
+              padding: { xs: 0.5, sm: 0.8 },
             }}
           >
             <Avatar
@@ -323,6 +284,7 @@ export default function NavBar({
                 "&:hover": {
                   color: "#FCE3CD",
                 },
+                padding: { xs: 0.6, sm: 0.8 },
               }}
             >
               <Avatar
