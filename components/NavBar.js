@@ -18,8 +18,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/app/logo.png";
 import { IoIosLogOut } from "react-icons/io";
-import { IoShareOutline } from "react-icons/io5";
 import { logoutAction } from "@/lib/userActions";
+import { RiTwitterXLine } from "react-icons/ri";
 export default function NavBar({ avatar, id, messages, notifications }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -70,7 +70,7 @@ export default function NavBar({ avatar, id, messages, notifications }) {
         >
           <Typography variant="body2">Share</Typography>
           <ListItemIcon>
-            <IoShareOutline size={18} />
+            <RiTwitterXLine size={18} />
           </ListItemIcon>
         </MenuItem>
         <Divider />

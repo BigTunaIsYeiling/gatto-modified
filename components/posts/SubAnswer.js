@@ -15,9 +15,9 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import { useState } from "react";
 import ReAsk from "./ReAsk";
-import { IoShareOutline } from "react-icons/io5";
 import ConfirmDialog from "./DeleteSub";
 import { LikeSubPostAction } from "@/lib/SubPostsActions";
+import { RiTwitterXLine } from "react-icons/ri";
 export const SubAnswer = ({
   post,
   avatar,
@@ -205,7 +205,7 @@ export const SubAnswer = ({
               >
                 <Typography variant="body2">Share</Typography>
                 <ListItemIcon>
-                  <IoShareOutline size={18} />
+                  <RiTwitterXLine size={18} />
                 </ListItemIcon>
               </MenuItem>
               <Divider />

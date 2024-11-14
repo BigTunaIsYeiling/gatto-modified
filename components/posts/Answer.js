@@ -14,12 +14,12 @@ import { format, formatDistanceToNow } from "date-fns";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import { useState } from "react";
-import { IoShareOutline } from "react-icons/io5";
 import { AiOutlineNodeExpand } from "react-icons/ai";
 import ConfirmDialog from "./DeletePost";
 import ReAsk from "./ReAsk";
 import { LikePostAction } from "@/lib/postsActions";
 import Link from "next/link";
+import { RiTwitterXLine } from "react-icons/ri";
 export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   // Local states to handle like status and count
@@ -212,7 +212,7 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
               >
                 <Typography variant="body2">Share</Typography>
                 <ListItemIcon>
-                  <IoShareOutline size={18} />
+                  <RiTwitterXLine size={18} />
                 </ListItemIcon>
               </MenuItem>
             )}
