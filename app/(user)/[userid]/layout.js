@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
         ],
       },
       twitter: {
-        card: "summary_large_image",
+        card: "summary",
         title: `${data?.username || "User"}'s profile`,
         description: `Learn more about ${data?.username || "this user"}.`,
         images: [data?.avatar],
