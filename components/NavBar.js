@@ -10,7 +10,6 @@ import {
   Avatar,
   ListItemIcon,
   Badge,
-  Stack,
 } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,6 +20,7 @@ import Logo from "@/app/logo.png";
 import { IoIosLogOut } from "react-icons/io";
 import { IoShareOutline } from "react-icons/io5";
 import { logoutAction } from "@/lib/userActions";
+import { TwitterShareButton } from "react-share";
 export default function NavBar({ avatar, id, messages, notifications }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -57,7 +57,12 @@ export default function NavBar({ avatar, id, messages, notifications }) {
           },
         }}
       >
-        <MenuItem sx={{ display: "flex", justifyContent: "space-between" }}>
+        <MenuItem
+          sx={{ display: "flex", justifyContent: "space-between" }}
+          component={TwitterShareButton}
+          url={`https://purrgato.vercel.app/${id}`}
+          title={"Ask me Gatto"}
+        >
           <Typography variant="body2">Share </Typography>
           <ListItemIcon>
             <IoShareOutline size={18} />
