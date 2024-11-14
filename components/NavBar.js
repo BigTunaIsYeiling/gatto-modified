@@ -57,10 +57,8 @@ export default function NavBar({ avatar, id, messages, notifications }) {
           },
         }}
       >
-        <MenuItem
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <Typography variant="body2">Share profile</Typography>
+        <MenuItem sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography variant="body2">Share </Typography>
           <ListItemIcon>
             <IoShareOutline size={18} />
           </ListItemIcon>
