@@ -58,8 +58,8 @@ export default function NavBar({ avatar, id, messages, notifications }) {
               borderRadius: 2,
               border: "1px solid rgba(255, 255, 255, 0.18)",
               boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-              p: 1,
-              width: 200,
+              p: 0.5,
+              width: 160,
             },
           },
         }}

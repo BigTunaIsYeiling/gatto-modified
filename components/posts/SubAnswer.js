@@ -189,13 +189,13 @@ export const SubAnswer = ({
               onClose={handleMenuClose}
               PaperProps={{
                 sx: {
-                  backgroundColor: "rgba(255, 255, 255, 0.25)", // Semi-transparent background
-                  backdropFilter: "blur(10px)", // Frosted glass effect
+                  backgroundColor: "rgba(255, 255, 255, 0.25)",
+                  backdropFilter: "blur(10px)",
                   borderRadius: 2,
                   border: "1px solid rgba(255, 255, 255, 0.18)",
-                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)", // Glass-like shadow
-                  p: 1,
-                  width: 170, // Adjust width to match
+                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+                  p: 0.6,
+                  width: 160,
                 },
               }}
             >
