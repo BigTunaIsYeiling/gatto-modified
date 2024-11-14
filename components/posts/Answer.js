@@ -16,13 +16,11 @@ import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import { useState } from "react";
 import { IoShareOutline } from "react-icons/io5";
 import { AiOutlineNodeExpand } from "react-icons/ai";
-import { useRouter } from "next/navigation";
 import ConfirmDialog from "./DeletePost";
 import ReAsk from "./ReAsk";
 import { LikePostAction } from "@/lib/postsActions";
 import Link from "next/link";
 export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
-  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   // Local states to handle like status and count
   const [isLiked, setIsLiked] = useState(post.likes.includes(userid));
@@ -58,6 +56,15 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
       setIsLiked(isLiked);
       setLikesCount(isLiked ? likesCount : likesCount - 1);
     }
+  };
+
+  const handleShareClick = () => {
+    const url = `https://purrgato.vercel.app/${useridPosts}/post/${post.id}`;
+    const text = "Gatto Answer";
+    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(text)}`;
+    window.open(twitterShareUrl, "_blank");
   };
 
   return (
@@ -202,6 +209,7 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
             {useridPosts == userid && (
               <MenuItem
                 sx={{ display: "flex", justifyContent: "space-between" }}
+                onClick={handleShareClick}
               >
                 <Typography variant="body2">Share</Typography>
                 <ListItemIcon>
