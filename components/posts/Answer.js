@@ -60,13 +60,12 @@ export const Answer = ({ post, avatar, username, userid, useridPosts }) => {
 
   const handleShareClick = () => {
     const url = `https://purrgato.vercel.app/${useridPosts}/post/${post.postId}`;
-    const text = "Gatto Answer";
+    const text = `${post.ask} - ${post.answer}`;
     const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
       url
     )}&text=${encodeURIComponent(text)}`;
     window.open(twitterShareUrl, "_blank");
   };
-
   return (
     <Box>
       <Box
