@@ -62,6 +62,14 @@ export const SubAnswer = ({
       setLikesCount(isLiked ? likesCount : likesCount - 1);
     }
   };
+  const handleShareClick = () => {
+    const url = `https://purrgato.vercel.app/${useridPosts}/post/${post.postId}`;
+    const text = `${post.ask} - ${post.answer}`;
+    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(text)}`;
+    window.open(twitterShareUrl, "_blank");
+  };
   return (
     <Box
       sx={{
@@ -193,6 +201,7 @@ export const SubAnswer = ({
             >
               <MenuItem
                 sx={{ display: "flex", justifyContent: "space-between" }}
+                onClick={handleShareClick}
               >
                 <Typography variant="body2">Share</Typography>
                 <ListItemIcon>
