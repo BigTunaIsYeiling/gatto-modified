@@ -110,7 +110,7 @@ const UserProfile = ({ children, data, userid, userdata }) => {
           />
         </Box>
         <Typography sx={{ mt: 2, fontSize: "28px", fontWeight: 500 }}>
-          {data.username}
+          {data.id ? data.username : "Not Exists"}
         </Typography>
         <Typography
           variant="body1"
@@ -160,6 +160,7 @@ const UserProfile = ({ children, data, userid, userdata }) => {
               },
               direction: direction,
             }}
+            disabled={data.id ? false : true}
           />
         </Box>
         <Box sx={{ width: "100%", maxWidth: 600 }}>

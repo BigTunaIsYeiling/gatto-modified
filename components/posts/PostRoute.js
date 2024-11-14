@@ -33,15 +33,17 @@ export default function PostOnePosts({
     <Box my={2} sx={{ width: "100%", maxWidth: 600 }}>
       <Divider />
       <Box sx={{ width: "100%", maxWidth: 600 }} my={1}>
-        <GlassButton
-          sx={{ width: "100%" }}
-          component={Link}
-          href={`/${userid}`}
-          prefetch={true}
-          scroll={false}
-        >
-          View {data.username + "'s"} All Answers
-        </GlassButton>
+        {data.id && (
+          <GlassButton
+            sx={{ width: "100%" }}
+            component={Link}
+            href={`/${userid}`}
+            prefetch={true}
+            scroll={false}
+          >
+            View {data.username + "'s"} All Answers
+          </GlassButton>
+        )}
       </Box>
       <Box sx={{ width: "100%", maxWidth: 600 }}>
         {Array.isArray(posts) && posts.length > 0 ? (

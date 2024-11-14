@@ -4,10 +4,22 @@ import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import BackgroundTokenRefresher from "./TokenRefreshcomponent";
 import GuestNavBar from "./UnloggedNavBar";
+import { usePathname, useRouter } from "next/navigation";
 
 const UserLayout = ({ children, data }) => {
   const [hydratedData, setHydratedData] = useState(null);
+  const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
+    if (!data.id) {
+      if (
+        pathname == "/messages" ||
+        pathname == "/" ||
+        pathname == "/notifications"
+      ) {
+        return router.push("/register");
+      }
+    }
     setHydratedData(data);
   }, [data]);
 
@@ -45,7 +57,7 @@ const UserLayout = ({ children, data }) => {
           overflowX: "hidden",
         }}
       >
-        <BackgroundTokenRefresher />
+        {data.id && <BackgroundTokenRefresher />}
         {children}
       </Box>
     </Box>
