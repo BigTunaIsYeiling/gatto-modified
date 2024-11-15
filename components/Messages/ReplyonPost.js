@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "@emotion/styled";
 import {
   Button,
@@ -33,6 +33,7 @@ const GlassButton = styled(Button)({
 });
 
 export default function ReplyOnPost({ content, id, parentpost, SetMessages }) {
+  const inputRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [replyText, setReplyText] = useState("");
   const [direction, setDirection] = useState("ltr");
@@ -110,6 +111,13 @@ export default function ReplyOnPost({ content, id, parentpost, SetMessages }) {
             },
           },
         }}
+        TransitionProps={{
+          onEntered: () => {
+            if (inputRef.current) {
+              inputRef.current.focus();
+            }
+          },
+        }}
       >
         <Box
           sx={{
@@ -153,6 +161,7 @@ export default function ReplyOnPost({ content, id, parentpost, SetMessages }) {
           <Divider sx={{ mt: 3 }} />
           <Box sx={{ width: "100%", maxWidth: 600 }}>
             <TextField
+              inputRef={inputRef}
               placeholder="Reply To Anonymous Message"
               multiline
               rows={6}

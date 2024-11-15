@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiSend } from "react-icons/bi";
 import { AddReplyonPost } from "@/lib/postsActions";
+import { useRef } from "react";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -33,6 +34,7 @@ const GlassButton = styled(Button)({
 });
 
 export default function ReAsk({ messagehead, senderid, receiverid, postId }) {
+  const inputRef = useRef(null);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -113,6 +115,13 @@ export default function ReAsk({ messagehead, senderid, receiverid, postId }) {
             },
           },
         }}
+        TransitionProps={{
+          onEntered: () => {
+            if (inputRef.current) {
+              inputRef.current.focus();
+            }
+          },
+        }}
       >
         <Box
           sx={{
@@ -156,6 +165,7 @@ export default function ReAsk({ messagehead, senderid, receiverid, postId }) {
           <Divider sx={{ mt: 3 }} />
           <Box sx={{ width: "100%", maxWidth: 600 }}>
             <TextField
+              inputRef={inputRef}
               placeholder="Reply To Anonymous Message"
               multiline
               rows={6}
