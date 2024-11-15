@@ -1,8 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import Message from "./Message";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const MessageList = ({ data }) => {
   const [messages, setMessages] = useState(data);
+  useEffect(() => {
+    setMessages(data);
+  }, [data]);
   return (
     <Box>
       {data.length != 0 ? (

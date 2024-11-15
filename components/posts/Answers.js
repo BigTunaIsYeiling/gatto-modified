@@ -1,7 +1,7 @@
 "use client";
 import { Box, Typography } from "@mui/material";
 import { Answer } from "./Answer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function Answers({
   userid,
   RouteUserdata,
@@ -9,6 +9,9 @@ export default function Answers({
   SignedUser,
 }) {
   const [posts, setposts] = useState(PostsData.PostsData);
+  useEffect(() => {
+    setposts(PostsData.PostsData);
+  }, [PostsData]);
   return (
     <>
       <Box sx={{ width: "100%", maxWidth: 600, textAlign: "left" }}>
