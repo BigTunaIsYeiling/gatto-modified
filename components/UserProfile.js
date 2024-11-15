@@ -9,11 +9,13 @@ import {
   Button,
   IconButton,
   CircularProgress,
+  Dialog,
 } from "@mui/material";
 import toast from "react-hot-toast";
 import { SendMessage } from "@/lib/MessagesActions";
 import { LiaUserEditSolid } from "react-icons/lia";
 import Link from "next/link";
+import { AiOutlineClose } from "react-icons/ai";
 const GlassButton = styled(Button)({
   background: "rgba(255, 255, 255, 0.25)",
   backdropFilter: "blur(10px)",
@@ -63,6 +65,10 @@ const UserProfile = ({ children, data, userid, userdata }) => {
       setDirection("ltr");
     }
   };
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box
       sx={{
@@ -110,8 +116,33 @@ const UserProfile = ({ children, data, userid, userdata }) => {
           <Avatar
             src={data.avatar}
             alt={data.username}
-            sx={{ width: 70, height: 70 }}
+            sx={{ width: 70, height: 70, cursor: "pointer" }}
+            onClick={handleOpen}
           />
+          <Dialog fullScreen open={open} onClose={handleClose}>
+            <IconButton
+              onClick={handleClose}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "rgba(0, 0, 0, 0.5)",
+                color: "white",
+              }}
+            >
+              <AiOutlineClose />
+            </IconButton>
+            <img
+              src={data.avatar}
+              alt="Full Screen"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                backgroundColor: "black",
+              }}
+            />
+          </Dialog>
         </Box>
         <Typography sx={{ mt: 2, fontSize: "28px", fontWeight: 500 }}>
           {data.id ? data.username : "Not Exists"}
